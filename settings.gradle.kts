@@ -20,4 +20,4 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "Dakiya"
-include(":app")
+include(":dakiya")
