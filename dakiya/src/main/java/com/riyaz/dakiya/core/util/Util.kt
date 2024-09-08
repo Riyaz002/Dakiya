@@ -15,7 +15,7 @@ import java.io.IOException
 import java.net.URL
 
 
-fun Map<String, String>.getOrNull(name: String): String?{
+fun Map<String, String?>.getOrNull(name: String): String?{
     return try {
         get(name) as String
     } catch (e: JSONException){
