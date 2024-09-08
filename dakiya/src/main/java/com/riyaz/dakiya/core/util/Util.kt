@@ -17,7 +17,7 @@ import java.net.URL
 
 fun Map<String, String?>.getOrNull(name: String): String?{
     return try {
-        get(name) as String
+        get(name)
     } catch (e: JSONException){
         null
     }
