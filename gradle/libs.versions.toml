@@ -21,4 +21,4 @@ firebase-messaging-ktx = { group = "com.google.firebase", name = "firebase-messa
 [plugins]
 android-library = { id = "com.android.library", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-
+maven-publish = { id = "maven.publish" }

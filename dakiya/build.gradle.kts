@@ -1,7 +1,11 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
+    `maven-publish`
 }
+
+group = "com.github.Riyaz002"
+
 
 android {
     namespace = "com.riyaz.dakiya"
@@ -41,4 +45,17 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+}
+
+afterEvaluate {
+    publishing{
+        publications {
+            create<MavenPublication>("release"){
+                from(components["release"])
+                groupId = "com.github.Riyaz002"
+                artifactId = "dakiya"
+                version = "0.0.1alpha"
+            }
+        }
+    }
 }
