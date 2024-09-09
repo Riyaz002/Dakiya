@@ -54,7 +54,7 @@ afterEvaluate {
                 from(components["release"])
                 groupId = "com.github.Riyaz002"
                 artifactId = "dakiya"
-                version = "0.0.8-alpha"
+                version = "0.0.9-alpha"
             }
         }
     }

@@ -5,6 +5,7 @@ import com.riyaz.dakiya.core.Constant.SUBTITLE
 import com.riyaz.dakiya.core.Constant.TITLE
 import com.riyaz.dakiya.core.util.getOrNull
 import com.riyaz.dakiya.core.util.template.Template
+import com.riyaz.dakiya.core.Constant.TEMPLATE
 import kotlin.random.Random
 
 data class Notification(
@@ -15,5 +16,5 @@ data class Notification(
     val template: String = Template.DEFAULT.name,
     val channel: String = "default"
 ){
-    constructor(data: Map<String, String>): this(data.getOrNull("id")?.toInt() ?: Random(10000).nextInt(), data.getOrNull(TITLE)!!, data.getOrNull(SUBTITLE), data.getOrNull(IMAGE))
+    constructor(data: Map<String, String>): this(data.getOrNull("id")?.toInt() ?: Random(10000).nextInt(), data.getOrNull(TITLE)!!, data.getOrNull(SUBTITLE), data.getOrNull(IMAGE), data.getOrNull(TEMPLATE)?: Template.DEFAULT.name)
 }

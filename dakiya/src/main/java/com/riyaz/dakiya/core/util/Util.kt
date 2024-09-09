@@ -2,14 +2,16 @@ package com.riyaz.dakiya.core.util
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
-import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Build
+import android.widget.RemoteViews
 import androidx.core.content.ContextCompat.getSystemService
 import com.riyaz.dakiya.Dakiya
 import com.riyaz.dakiya.core.util.template.NotificationTemplate
 import com.riyaz.dakiya.core.util.template.Template
+import com.riyaz.dakiya.R
+import com.riyaz.dakiya.core.model.Notification
 import org.json.JSONException
 import java.io.IOException
 import java.net.URL
@@ -51,6 +53,7 @@ fun getImageBitmap(imageUrl: String?): Bitmap?{
 fun String.getTemplate(): NotificationTemplate {
     return when(this){
         Template.DEFAULT.name -> Template.DEFAULT.template
+        Template.DEFAULT_IMAGE.name -> Template.DEFAULT_IMAGE.template
         else -> throw DakiyaException("No Such Template Found: $this")
     }
 }
@@ -58,4 +61,14 @@ fun String.getTemplate(): NotificationTemplate {
 fun getNotificationManager(): NotificationManager? {
     return if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.M) Dakiya.getContext().getSystemService<NotificationManager>(NotificationManager::class.java)
     else getSystemService(Dakiya.getContext(), NotificationManager::class.java)
+}
+
+fun RemoteViews.performApiLevelConfiguration(data: Notification) {
+    if(Build.VERSION.SDK_INT <= Build.VERSION_CODES.N){
+        setViewPadding(R.id.ll_root,32, 32, 32,32)
+    }
+}
+
+fun isBuildVersionSmallerThan(build: Int): Boolean{
+    return Build.VERSION.SDK_INT < build
 }

@@ -9,11 +9,12 @@ import com.riyaz.dakiya.R
 import com.riyaz.dakiya.core.model.Notification
 import com.riyaz.dakiya.core.util.Event
 import com.riyaz.dakiya.core.util.EventListener
+import com.riyaz.dakiya.core.util.getImageBitmap
 import com.riyaz.dakiya.core.util.isBuildVersionSmallerThan
 import com.riyaz.dakiya.core.util.performApiLevelConfiguration
 
 
-class Default(private val context: Context): NotificationTemplate() {
+class DefaultImage(private val context: Context): NotificationTemplate() {
     override fun prepareBuilder(data: Notification): NotificationCompat.Builder {
         EventListener.emit(Event.Build(context, data.channel))
         val builder = NotificationCompat.Builder(context, data.channel)
@@ -32,7 +33,15 @@ class Default(private val context: Context): NotificationTemplate() {
         if(isBuildVersionSmallerThan(Build.VERSION_CODES.N_MR1)) expandedView.setViewVisibility(R.id.ll_notification_header, View.VISIBLE)
         expandedView.setTextViewText(R.id.notification_title, data.title)
         expandedView.setTextViewText(R.id.notification_body, data.subtitle)
+
+        data.image?.let {
+            val image = getImageBitmap(it)
+            expandedView.setViewVisibility(R.id.notification_image, View.VISIBLE)
+            expandedView.setImageViewBitmap(R.id.notification_image, image)
+        }
+
         builder.setCustomBigContentView(expandedView)
+
 
         return builder
     }
