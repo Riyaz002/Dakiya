@@ -1,1 +1,2 @@
-[![](https://jitpack.io/v/Riyaz002/Dakiya.svg)](https://jitpack.io/#Riyaz002/Dakiya)
+<h1>Dakiya</h1>
+<br>
