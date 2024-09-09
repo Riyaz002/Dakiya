@@ -1,8 +1,8 @@
 package com.riyaz.dakiya.core.util.template
 
-import android.app.Notification
+import androidx.core.app.NotificationCompat
 
 
 abstract class NotificationTemplate {
-    abstract fun build(data: com.riyaz.dakiya.core.model.Notification): Notification
+    abstract fun prepareBuilder(data: com.riyaz.dakiya.core.model.Notification): NotificationCompat.Builder
 }
