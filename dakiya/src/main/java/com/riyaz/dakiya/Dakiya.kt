@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.core.app.NotificationCompat
 import com.google.firebase.messaging.RemoteMessage
 import com.riyaz.dakiya.core.Constant.DAKIYA
-import com.riyaz.dakiya.core.NotificationProcessor
+import com.riyaz.dakiya.core.notification.NotificationProcessor
 import com.riyaz.dakiya.core.util.getOrNull
 
 object Dakiya {

@@ -1,10 +1,10 @@
-package com.riyaz.dakiya.core
+package com.riyaz.dakiya.core.notification
 
 import androidx.core.app.NotificationCompat
 import com.google.firebase.messaging.RemoteMessage
 import com.riyaz.dakiya.core.model.Notification
+import com.riyaz.dakiya.core.notification.Style.Companion.getStyle
 import com.riyaz.dakiya.core.util.DakiyaException
-import com.riyaz.dakiya.core.util.getTemplate
 
 internal object NotificationProcessor {
 
@@ -12,7 +12,7 @@ internal object NotificationProcessor {
     fun process(message: RemoteMessage): NotificationCompat.Builder{
         message.data.apply {
             val notificationData = Notification(this)
-            val template = notificationData.template.getTemplate()
+            val template = notificationData.style.getStyle()
             return template.prepareBuilder(notificationData)
         }
     }
