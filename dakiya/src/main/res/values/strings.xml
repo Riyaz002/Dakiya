@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Dakiya</string>
+    <string name="notification_image">notification image</string>
 </resources>
