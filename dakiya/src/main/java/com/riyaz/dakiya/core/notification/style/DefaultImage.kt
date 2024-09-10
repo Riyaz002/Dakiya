@@ -33,9 +33,13 @@ internal class DefaultImage(private val context: Context): NotificationStyle {
             val image = getImageBitmap(it)
             expandedView.setViewVisibility(R.id.notification_image, View.VISIBLE)
             expandedView.setImageViewBitmap(R.id.notification_image, image)
+
+            collapsedView.setViewVisibility(R.id.notification_image, View.VISIBLE)
+            collapsedView.setImageViewBitmap(R.id.notification_image, image)
         }
 
         builder.setCustomBigContentView(expandedView)
+        builder.setStyle(NotificationCompat.DecoratedCustomViewStyle())
 
 
         return builder

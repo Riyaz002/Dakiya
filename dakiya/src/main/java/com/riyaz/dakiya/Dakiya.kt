@@ -6,15 +6,18 @@ import com.google.firebase.messaging.RemoteMessage
 import com.riyaz.dakiya.core.Constant.DAKIYA
 import com.riyaz.dakiya.core.notification.NotificationProcessor
 import com.riyaz.dakiya.core.util.getOrNull
+import java.lang.ref.WeakReference
 
 object Dakiya {
 
-    private lateinit var applicationContext: Context
+    private var weakContextRef: WeakReference<Context>? = null
+    private val applicationContext: Context
+        get() = weakContextRef!!.get()!!
 
     fun getContext() = applicationContext
 
     fun init(context: Context){
-        applicationContext = context.applicationContext
+        weakContextRef = WeakReference(context.applicationContext)
     }
 
     fun isDakiyaNotification(message: RemoteMessage): Boolean{
