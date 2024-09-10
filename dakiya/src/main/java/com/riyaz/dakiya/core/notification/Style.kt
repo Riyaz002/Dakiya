@@ -4,16 +4,16 @@ import com.riyaz.dakiya.Dakiya
 import com.riyaz.dakiya.core.notification.style.Default
 import com.riyaz.dakiya.core.notification.style.DefaultImage
 
-internal enum class Style(val style: NotificationStyle) {
+enum class Style(val builderAssembler: NotificationBuilderAssembler) {
     DEFAULT(Default(Dakiya.getContext())),
     DEFAULT_IMAGE(DefaultImage(Dakiya.getContext()));
 
     companion object {
-        fun String.getStyle(): NotificationStyle {
+        fun String.getStyle(): Style {
             return when(this){
-                DEFAULT.name -> DEFAULT.style
-                DEFAULT_IMAGE.name -> DEFAULT_IMAGE.style
-                else -> DEFAULT.style
+                DEFAULT.name -> DEFAULT
+                DEFAULT_IMAGE.name -> DEFAULT_IMAGE
+                else -> DEFAULT
             }
         }
     }

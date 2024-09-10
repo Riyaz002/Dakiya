@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.core.app.NotificationCompat
 import com.google.firebase.messaging.RemoteMessage
 import com.riyaz.dakiya.core.Constant.DAKIYA
-import com.riyaz.dakiya.core.notification.NotificationProcessor
+import com.riyaz.dakiya.core.model.Message
 import com.riyaz.dakiya.core.util.getOrNull
 import java.lang.ref.WeakReference
 
@@ -24,7 +24,8 @@ object Dakiya {
         return message.data.getOrNull(DAKIYA)?.toBoolean() == true
     }
 
-    fun processNotification(message: RemoteMessage): NotificationCompat.Builder {
-        return NotificationProcessor.process(message)
+    fun prepareNotificationBuilder(message: Message): NotificationCompat.Builder {
+        val assembler = message.style.builderAssembler
+        return assembler.assembleBuilder(message)
     }
 }
