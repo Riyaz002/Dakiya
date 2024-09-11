@@ -16,6 +16,11 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+      - name: Initialize required variables
+        run: |
+          echo "Tag_Name=$(awk -F= '$1 == "TAG_NAME"{print $2}' release.properties)" >> $GITHUB_ENV
+          echo "Release_Name=$(awk -F= '$1 == "RELEASE_NAME"{print $2}' release.properties)" >> $GITHUB_ENV
+          echo "Prerelease=$(awk -F= '$1 == "Prerelease"{print $2}' release.properties)" >> $GITHUB_ENV
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -24,12 +29,7 @@ jobs:
           # Release_Name: ${{ $(awk -F= '$1 == "RELEASE_NAME"{print $2}' release.properties) }}
           # Prerelease: ${{ $(awk -F= '$1 == "PRE_RELEASE"{print $2}' release.properties) }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          run: |
-            echo "Tag_Name=$(awk -F= '$1 == "TAG_NAME"{print $2}' release.properties)" >> $GITHUB_ENV
-            echo "Release_Name=$(awk -F= '$1 == "RELEASE_NAME"{print $2}' release.properties)" >> $GITHUB_ENV
-            echo "Prerelease=$(awk -F= '$1 == "Prerelease"{print $2}' release.properties)" >> $GITHUB_ENV
-            
+        with:    
           tag_name: ${{ env.Tag_Name }}
           release_name: ${{ env.Release_Name }}
           body: |
