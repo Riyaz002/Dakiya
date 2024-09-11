@@ -7,18 +7,18 @@ Introducing **Dakiya**, an Android library designed to render beautiful and high
 - Add the below dependency in your app.gradle
 ```kotlin
     dependencies {
-	        implementation 'com.github.Riyaz002:Dakiya:0.1.5-alpha'
+        implementation 'com.github.Riyaz002:Dakiya:0.1.5-alpha'
     }
 ```
 - Make sure you have include the required repository.  Add this into your project.gradle
 ```kotlin
-	dependencyResolutionManagement {
-		repositories {
-			...
-			maven { url 'https://jitpack.io' }
-			...
-		}
+    dependencyResolutionManagement {
+	repositories {
+            ...
+		maven { url 'https://jitpack.io' }
+            ...
 	}
+    }
 ```
 Sync your project once done.
 
@@ -26,25 +26,25 @@ Sync your project once done.
 ### Intialization
 In your application file.
 ```kotlin
-	override fun onCreate() {  
-		Dakiya.init(this)  
+    override fun onCreate() {  
+	Dakiya.init(this)  
     }
 ```
 
 ### Show notification
 ```kotlin
-	val message = Message(  
-	    id = 1,  
-		title = "Hi Daak",  
-		subtitle = "A notification is a brief alert or message sent to users to inform them of updates, reminders, or important events." +  
+    val message = Message(  
+        id = 1,  
+        title = "Hi Daak",  
+	subtitle = "A notification is a brief alert or message sent to users to inform them of updates, reminders, or important events." +  
             " It can appear on various devices, such as smartphones or computers," +  
             " and helps users stay informed about relevant activities or changes without needing to constantly check the application or service manually.",  
-		image = "https://images.unsplash.com/photo-1725881282478-54c8f001e0a0?q=80&w=1858&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",  
-		style = Style.DEFAULT,  
-		smallIcon = R.drawable.notification_small_icon,  
-		channel = CHANNEL_ID  
-	)
-	Dakiya.showNotification(message)	
+	image = "https://images.unsplash.com/photo-1725881282478-54c8f001e0a0?q=80&w=1858&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",  
+	style = Style.DEFAULT,  
+	smallIcon = R.drawable.notification_small_icon,  
+	channel = CHANNEL_ID
+    )
+    Dakiya.showNotification(message)	
 ```
 
 ### With Firebase notification service
@@ -55,26 +55,24 @@ Data sample for push notification required by ***Dakiya***
 ```js
 	```
 // The topic name can be optionally prefixed with "/topics/".
-	const topic = 'highScores';
-
-	const message = {
-	  data: {
-	    title: 'Hi Daak',
+    const topic = 'highScores';
+    const message = {
+      data: {
+        title: 'Hi Daak',
         subtitle: 'A notification is a brief alert or message sent to users to inform them of updates, reminders, or important events' +  
             " It can appear on various devices, such as smartphones or computers," +  
             " and helps users stay informed about relevant activities or changes without needing to constantly check the application or service manually.",
-        
         //optional  
-		image = 'https://images.unsplash.com/photo-1725881282478-54c8f001e0a0?q=80&w=1858&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' //optional
+	image = 'https://images.unsplash.com/photo-1725881282478-54c8f001e0a0?q=80&w=1858&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' //optional
       },
-	  topic: topic
+      topic: topic
     };
 
 // Send a message to devices subscribed to the provided topic.
-	getMessaging().send(message)
+    getMessaging().send(message)
       .then((response) => {
     // Response is a message ID string.
-      console.log('Successfully sent message:', response);
+       console.log('Successfully sent message:', response);
     })
    .catch((error) => {
      console.log('Error sending message:', error);
@@ -84,15 +82,15 @@ Data sample for push notification required by ***Dakiya***
 
 Inside your FirebaseMessagingService class
 ```kotlin
-	class MyNotificationService : FirebaseMessagingService() {  
-	    override fun onMessageReceived(message: RemoteMessage) {  
-	        super.onMessageReceived(message)  
-		    if(Dakiya.isDakiyaNotification(message)){
-			    val dakiyaMessage = message.toDakiyaMessage(channel = CHANNEL_ID, smallIcon = R.drawable.notification_small_icon)
-			    Dakiya.showNotification(dakiyaMessage)
-            }  
-		}
-	}
+    class MyNotificationService : FirebaseMessagingService() {  
+        override fun onMessageReceived(message: RemoteMessage) {  
+            super.onMessageReceived(message)
+            if(Dakiya.isDakiyaNotification(message)){
+	        val dakiyaMessage = message.toDakiyaMessage(channel = CHANNEL_ID, smallIcon = R.drawable.notification_small_icon)
+	        Dakiya.showNotification(dakiyaMessage)
+            }
+        }
+    }
 ```
 
 Dakiya is in development phase and has no production release yet. Please use this only in non-production app.
