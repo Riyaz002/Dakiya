@@ -36,4 +36,4 @@ jobs:
             Changes in this Release
             - Bug fix
           draft: false
-          prerelease: ${{ env.Prerelease }}
+          prerelease: ${{ env.Prerelease == 'true' }}
