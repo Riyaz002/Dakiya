@@ -5,6 +5,7 @@ import androidx.core.app.NotificationCompat
 import com.google.firebase.messaging.RemoteMessage
 import com.riyaz.dakiya.core.Constant.DAKIYA
 import com.riyaz.dakiya.core.model.Message
+import com.riyaz.dakiya.core.util.getNotificationManager
 import com.riyaz.dakiya.core.util.getOrNull
 import java.lang.ref.WeakReference
 
@@ -24,8 +25,17 @@ object Dakiya {
         return message.data.getOrNull(DAKIYA)?.toBoolean() == true
     }
 
+    /**
+     * Use this to get [NotificationCompat.Builder] with configurations according to input [Message]
+     * Helpful in case you want to perform extra configuration for the notification
+     */
     fun prepareNotificationBuilder(message: Message): NotificationCompat.Builder {
         val assembler = message.style.builderAssembler
         return assembler.assembleBuilder(message)
+    }
+
+    fun showNotification(message: Message){
+        val notification = prepareNotificationBuilder(message).build()
+        getNotificationManager()?.notify(message.id, notification)
     }
 }

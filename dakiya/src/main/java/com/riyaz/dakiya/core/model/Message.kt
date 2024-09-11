@@ -16,14 +16,16 @@ data class Message(
     val subtitle: String? = null,
     val image: String? = null,
     val style: Style = Style.DEFAULT,
+    val smallIcon: Int,
     val channel: String = "default"
 )
 
-fun RemoteMessage.toDakiyaMessage(channel: String) = Message(
+fun RemoteMessage.toDakiyaMessage(id: Int, channel: String, smallIcon: Int) = Message(
     id = data.getOrNull("id")?.toInt() ?: Random(10000).nextInt(),
     title = data.getOrNull(TITLE)!!,
     subtitle = data.getOrNull(SUBTITLE),
     image = data.getOrNull(IMAGE),
     style = data.getOrNull(TEMPLATE)?.getStyle() ?: Style.DEFAULT,
+    smallIcon = smallIcon,
     channel = channel
 )

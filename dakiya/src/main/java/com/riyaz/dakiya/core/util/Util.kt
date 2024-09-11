@@ -1,9 +1,12 @@
 package com.riyaz.dakiya.core.util
 
+import android.app.NotificationManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Build
 import android.widget.RemoteViews
+import androidx.core.content.ContextCompat.getSystemService
+import com.riyaz.dakiya.Dakiya
 import com.riyaz.dakiya.R
 import org.json.JSONException
 import java.io.IOException
@@ -36,4 +39,10 @@ fun RemoteViews.performApiLevelConfiguration() {
     if(Build.VERSION.SDK_INT <= Build.VERSION_CODES.N){
         setViewPadding(R.id.ll_root,32, 32, 32,32)
     }
+}
+
+fun getNotificationManager(): NotificationManager?{
+    return if(Build.VERSION.SDK_INT > Build.VERSION_CODES.M){
+        Dakiya.getContext().getSystemService(NotificationManager::class.java)
+    } else getSystemService(Dakiya.getContext(), NotificationManager::class.java)
 }
