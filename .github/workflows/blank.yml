@@ -20,7 +20,9 @@ jobs:
         run: |
           echo "Tag_Name=$(awk -F= '$1 == "TAG_NAME"{print $2}' release.properties)" >> $GITHUB_ENV
           echo "Release_Name=$(awk -F= '$1 == "RELEASE_NAME"{print $2}' release.properties)" >> $GITHUB_ENV
-          echo "Prerelease=$(awk -F= '$1 == "Prerelease"{print $2}' release.properties)" >> $GITHUB_ENV
+          echo "Prerelease=$(awk -F= '$1 == "PRE_RELEASE"{print $2}' release.properties)" >> $GITHUB_ENV
+          echo "Release_Note=$(awk -F= '$1 == "RELEASE_NOTE"{print $2}' release.properties)" >> $GITHUB_ENV
+        
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -34,6 +36,6 @@ jobs:
           release_name: ${{ env.Release_Name }}
           body: |
             Changes in this Release
-            - Bug fix
+            - $Release_Note
           draft: false
           prerelease: ${{ env.Prerelease == 'true' }}
