@@ -12,11 +12,36 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+      - name: Set Up JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu' # See 'Supported distributions' for available options
+          java-version: '17'
+          cache: 'gradle'
       - name: Make gradlew executable
         run: chmod +x ./gradlew
       - name: Build
         run: ./gradlew build
         
+  test:
+    name: Perform Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Set Up JDK
+        uses: actions/setup-java@v3
+        
+        with:
+          distribution: 'zulu' # See 'Supported distributions' for available options
+          java-version: '17'
+          cache: 'gradle'
+          
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+      - name: Build
+        run: ./gradlew test
+          
   release:
     needs: build
     name: Create Release
