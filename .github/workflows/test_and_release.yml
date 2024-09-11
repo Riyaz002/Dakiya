@@ -56,6 +56,6 @@ jobs:
           release_name: ${{ env.Release_Name }}
           body: |
             Changes in this Release
-            - $Release_Note
+            - ${{ env.Release_Note }}
           draft: false
           prerelease: ${{ env.Prerelease == 'true' }}
