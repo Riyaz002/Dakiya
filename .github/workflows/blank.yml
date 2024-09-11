@@ -7,6 +7,18 @@ on:
   workflow_dispatch: null
 jobs:
   build:
+    name: Build project
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+      - name: Build
+        run: ./gradlew build
+        
+  release:
+    needs: build
     name: Create Release
     runs-on: ubuntu-latest
     permissions:
