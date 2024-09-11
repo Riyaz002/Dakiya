@@ -29,7 +29,7 @@ object Dakiya {
      * Use this to get [NotificationCompat.Builder] with configurations according to input [Message]
      * Helpful in case you want to perform extra configuration for the notification
      */
-    fun prepareNotificationBuilder(message: Message): NotificationCompat.Builder {
+    private fun prepareNotificationBuilder(message: Message): NotificationCompat.Builder {
         val assembler = message.style.builderAssembler
         return assembler.assembleBuilder(message)
     }
