@@ -20,11 +20,16 @@ jobs:
         id: create_release
         uses: actions/create-release@v1
         env:
-          Tag_Name: ${{ $(awk -F= '$1 == "TAG_NAME"{print $2}' release.properties) }}
-          Release_Name: ${{ $(awk -F= '$1 == "RELEASE_NAME"{print $2}' release.properties) }}
-          Prerelease: ${{ $(awk -F= '$1 == "PRE_RELEASE"{print $2}' release.properties) }}
+          # Tag_Name: ${{ $(awk -F= '$1 == "TAG_NAME"{print $2}' release.properties) }}
+          # Release_Name: ${{ $(awk -F= '$1 == "RELEASE_NAME"{print $2}' release.properties) }}
+          # Prerelease: ${{ $(awk -F= '$1 == "PRE_RELEASE"{print $2}' release.properties) }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
+          run: |
+            echo "Tag_Name=$(awk -F= '$1 == "TAG_NAME"{print $2}' release.properties)" >> $GITHUB_ENV
+            echo "Release_Name=$(awk -F= '$1 == "RELEASE_NAME"{print $2}' release.properties)" >> $GITHUB_ENV
+            echo "Prerelease=$(awk -F= '$1 == "Prerelease"{print $2}' release.properties)" >> $GITHUB_ENV
+            
           tag_name: ${{ env.Tag_Name }}
           release_name: ${{ env.Release_Name }}
           body: |
