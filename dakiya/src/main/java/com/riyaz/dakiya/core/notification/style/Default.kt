@@ -14,6 +14,7 @@ internal class Default(private val context: Context): NotificationBuilderAssembl
         val builder = NotificationCompat.Builder(context, message.channel)
             .setContentTitle(message.title)
             .setContentText(message.subtitle)
+            .setSmallIcon(message.smallIcon)
             .setAutoCancel(true)
 
         val collapsedView = RemoteViews(context.packageName, R.layout.default_collapsed)
