@@ -31,11 +31,10 @@ jobs:
           Prerelease: awk -F= '$1 == "PRE_RELEASE"{print $2}' release.properties
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
         with:
-          run: echo ${{ env.Tag_Name }}
-          tag_name: env.Tag_Name
-          release_name: env.Release_Name
+          tag_name: ${{ env.Tag_Name }}
+          release_name: ${{ env.Release_Name }}
           body: |
             Changes in this Release
             - Bug fix
           draft: false
-          prerelease: env.Prerelease
+          prerelease: ${{ env.Prerelease }}
