@@ -6,7 +6,7 @@ on:
       - master
   workflow_dispatch: null
 jobs:
-  build:
+  build-and-test:
     name: Build project
     runs-on: ubuntu-latest
     steps:
@@ -22,28 +22,11 @@ jobs:
         run: chmod +x ./gradlew
       - name: Build
         run: ./gradlew build
-        
-  test:
-    name: Perform Test
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Set Up JDK
-        uses: actions/setup-java@v3
-        
-        with:
-          distribution: 'zulu' # See 'Supported distributions' for available options
-          java-version: '17'
-          cache: 'gradle'
-          
-      - name: Make gradlew executable
-        run: chmod +x ./gradlew
-      - name: Build
+      - name: Test
         run: ./gradlew test
-          
+        
   release:
-    needs: build
+    needs: build-and-test
     name: Create Release
     runs-on: ubuntu-latest
     permissions:
