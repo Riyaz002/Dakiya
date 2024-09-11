@@ -20,8 +20,8 @@ data class Message(
     val channel: String = "default"
 )
 
-fun RemoteMessage.toDakiyaMessage(id: Int, channel: String, smallIcon: Int) = Message(
-    id = data.getOrNull("id")?.toInt() ?: Random(10000).nextInt(),
+fun RemoteMessage.toDakiyaMessage(channel: String, smallIcon: Int, notificationId: Int? = null) = Message(
+    id = notificationId ?: Random(10000).nextInt(),
     title = data.getOrNull(TITLE)!!,
     subtitle = data.getOrNull(SUBTITLE),
     image = data.getOrNull(IMAGE),
