@@ -1,14 +1,6 @@
 package com.riyaz.dakiya.core.model
 
-import com.google.firebase.messaging.RemoteMessage
-import com.riyaz.dakiya.core.Constant.IMAGE
-import com.riyaz.dakiya.core.Constant.SUBTITLE
-import com.riyaz.dakiya.core.Constant.TITLE
-import com.riyaz.dakiya.core.util.getOrNull
 import com.riyaz.dakiya.core.notification.Style
-import com.riyaz.dakiya.core.Constant.TEMPLATE
-import com.riyaz.dakiya.core.notification.Style.Companion.getStyle
-import kotlin.random.Random
 
 data class Message(
     val id: Int,
@@ -17,15 +9,19 @@ data class Message(
     val image: String? = null,
     val style: Style = Style.DEFAULT,
     val smallIcon: Int,
-    val channel: String = "default"
-)
-
-fun RemoteMessage.toDakiyaMessage(channel: String, smallIcon: Int, notificationId: Int? = null) = Message(
-    id = notificationId ?: Random(10000).nextInt(),
-    title = data.getOrNull(TITLE)!!,
-    subtitle = data.getOrNull(SUBTITLE),
-    image = data.getOrNull(IMAGE),
-    style = data.getOrNull(TEMPLATE)?.getStyle() ?: Style.DEFAULT,
-    smallIcon = smallIcon,
-    channel = channel
-)
+    val channel: String = "default",
+    val timer: Timer? = null,
+    val themeColor: String? = null
+){
+    companion object{
+        const val ID = "id"
+        const val TITLE = "title"
+        const val SUBTITLE = "subtitle"
+        const val IMAGE = "image"
+        const val STYLE = "style"
+        const val SMALL_ICON = "small_icon"
+        const val TIME = "time" //uses this format "2024-09-08T12:34:56.OOOZ"
+        const val COLOR = "color"
+        const val CHANNEL = "channel"
+    }
+}
