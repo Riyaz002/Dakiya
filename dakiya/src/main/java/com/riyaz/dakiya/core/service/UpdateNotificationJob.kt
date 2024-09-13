@@ -9,7 +9,7 @@ import com.riyaz.dakiya.core.model.Timer
 import com.riyaz.dakiya.core.notification.Style.Companion.getStyle
 import com.riyaz.dakiya.core.util.getNotificationManager
 
-class UpdateNotificationJob: JobService() {
+internal class UpdateNotificationJob: JobService() {
     override fun onStartJob(params: JobParameters?): Boolean {
         val extras = params!!.extras
         val message = extras.toDakiyaMessage()

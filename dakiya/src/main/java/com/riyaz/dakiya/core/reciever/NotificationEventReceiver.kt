@@ -7,7 +7,7 @@ import android.content.Intent
 import androidx.core.content.ContextCompat.getSystemService
 import com.riyaz.dakiya.core.model.Message
 
-class NotificationEventReceiver: BroadcastReceiver() {
+internal class NotificationEventReceiver: BroadcastReceiver() {
     override fun onReceive(context: Context?, intent: Intent?) {
         when(intent?.action){
             ACTION_DELETE -> {
