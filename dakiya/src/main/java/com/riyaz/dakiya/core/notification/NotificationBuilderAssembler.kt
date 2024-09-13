@@ -3,8 +3,10 @@ package com.riyaz.dakiya.core.notification
 
 import androidx.core.app.NotificationCompat
 import com.riyaz.dakiya.core.model.Message
+import com.riyaz.dakiya.core.util.DakiyaException
 
 
 fun interface NotificationBuilderAssembler {
-    fun assembleBuilder(message: Message): NotificationCompat.Builder
+    @Throws(DakiyaException::class)
+    fun assemble(message: Message): NotificationCompat.Builder
 }

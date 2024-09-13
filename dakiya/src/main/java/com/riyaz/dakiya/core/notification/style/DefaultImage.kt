@@ -12,7 +12,7 @@ import com.riyaz.dakiya.core.util.performApiLevelConfiguration
 
 
 internal class DefaultImage(private val context: Context): NotificationBuilderAssembler {
-    override fun assembleBuilder(message: Message): NotificationCompat.Builder {
+    override fun assemble(message: Message): NotificationCompat.Builder {
         val builder = NotificationCompat.Builder(context, message.channel)
             .setContentTitle(message.title)
             .setContentText(message.subtitle)
