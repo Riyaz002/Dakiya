@@ -1,15 +1,13 @@
 package com.riyaz.dakiya.core.notification
 
-import android.os.Build
-import com.riyaz.dakiya.Dakiya
 import com.riyaz.dakiya.core.notification.style.Default
 import com.riyaz.dakiya.core.notification.style.DefaultImage
 import com.riyaz.dakiya.core.notification.style.ProgressWithTimer
 
 enum class Style(val builderAssembler: NotificationBuilderAssembler) {
-    DEFAULT(Default(Dakiya.getContext())),
-    DEFAULT_IMAGE(DefaultImage(Dakiya.getContext())),
-    PROGRESS_TIMER(ProgressWithTimer(Dakiya.getContext()));
+    DEFAULT(Default()),
+    DEFAULT_IMAGE(DefaultImage()),
+    PROGRESS_TIMER(ProgressWithTimer());
 
     companion object {
         fun String.getStyle(): Style {

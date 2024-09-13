@@ -1,7 +1,6 @@
 package com.riyaz.dakiya.core.notification.style
 
 import android.app.PendingIntent
-import android.content.Context
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Color
@@ -14,9 +13,11 @@ import com.riyaz.dakiya.core.reciever.NotificationEventReceiver
 import com.riyaz.dakiya.core.reciever.NotificationEventReceiver.Companion.ACTION_DELETE
 import com.riyaz.dakiya.Dakiya
 import com.riyaz.dakiya.R
+import com.riyaz.dakiya.core.model.Event
 import com.riyaz.dakiya.core.model.Message
 import com.riyaz.dakiya.core.notification.NotificationBuilderAssembler
 import com.riyaz.dakiya.core.util.DakiyaException
+import com.riyaz.dakiya.core.EventListener
 import com.riyaz.dakiya.core.util.endsInMillis
 import com.riyaz.dakiya.core.util.getImageBitmap
 import com.riyaz.dakiya.core.util.getNotificationManager
@@ -26,12 +27,11 @@ import java.util.Date
 
 
 
-internal class ProgressWithTimer(private val context: Context): NotificationBuilderAssembler {
+internal class ProgressWithTimer: NotificationBuilderAssembler {
 
     override fun assemble(message: Message): NotificationCompat.Builder {
         if(Build.VERSION.SDK_INT < Build.VERSION_CODES.O) throw DakiyaException("Minimum required API level for this style is 24")
-
-        val builder = NotificationCompat.Builder(context, message.channel)
+        val builder = NotificationCompat.Builder(Dakiya.getContext(), message.channel)
             .setContentTitle(message.title)
             .setContentText(message.subtitle)
             .setSmallIcon(message.smallIcon)
@@ -68,7 +68,7 @@ internal class ProgressWithTimer(private val context: Context): NotificationBuil
 
         val themeColor = Color.parseColor(message.themeColor)
 
-        val collapsedView = RemoteViews(context.packageName, R.layout.progress_timer_collapsed)
+        val collapsedView = RemoteViews(Dakiya.getContext().packageName, R.layout.progress_timer_collapsed)
         collapsedView.performApiLevelConfiguration()
         collapsedView.setTextViewText(R.id.notification_title, message.title)
         collapsedView.setTextViewText(R.id.notification_subtitle, message.subtitle)
@@ -76,7 +76,7 @@ internal class ProgressWithTimer(private val context: Context): NotificationBuil
         collapsedView.setChronometer(R.id.notification_timer, (SystemClock.elapsedRealtime()+endInMillis), null, true)
         collapsedView.setInt(R.id.notification_timer, "setTextColor", themeColor)
 
-        val expandedView = RemoteViews(context.packageName, R.layout.progress_timer_expanded)
+        val expandedView = RemoteViews(Dakiya.getContext().packageName, R.layout.progress_timer_expanded)
         expandedView.performApiLevelConfiguration()
         expandedView.setTextViewText(R.id.notification_title, message.title)
         expandedView.setTextViewText(R.id.notification_subtitle, message.subtitle)
@@ -105,6 +105,8 @@ internal class ProgressWithTimer(private val context: Context): NotificationBuil
         builder.setCustomContentView(collapsedView)
         builder.setCustomBigContentView(expandedView)
         builder.setStyle(NotificationCompat.DecoratedCustomViewStyle())
+
+        EventListener.register(Event.ScheduleUpdateNotificationJob(message))
         return builder
     }
 
