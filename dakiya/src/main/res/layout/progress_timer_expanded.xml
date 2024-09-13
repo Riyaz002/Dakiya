@@ -38,7 +38,7 @@
         style="@style/TextAppearance.Compat.Notification.Line2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dimen_5dp"
+        android:layout_marginTop="5dp"
         android:layout_below="@+id/notification_title"
         android:ellipsize="end"
         android:textSize="14sp"
@@ -48,9 +48,10 @@
         android:id="@+id/notification_progress"
         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
         android:layout_width="300dp"
+        android:layout_alignParentStart="true"
         android:layout_toStartOf="@+id/notification_timer"
         android:layout_height="wrap_content"
         android:layout_below="@id/notification_subtitle"
-        android:layout_marginTop="@dimen/dimen_5dp"
+        android:layout_marginTop="5dp"
         android:indeterminate="false" />
 </RelativeLayout>
