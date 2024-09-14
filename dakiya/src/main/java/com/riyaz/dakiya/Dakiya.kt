@@ -32,7 +32,7 @@ object Dakiya {
      */
     fun prepareNotificationBuilder(message: Message): Result<NotificationCompat.Builder> {
         try{
-            val assembler = message.style.builderAssembler
+            val assembler = message.style.getAssembler()
             return Result.success(assembler.assemble(message))
         } catch (e: DakiyaException){
             return Result.failure(e)

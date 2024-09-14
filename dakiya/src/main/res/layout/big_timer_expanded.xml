@@ -7,6 +7,12 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal">
 
+    <FrameLayout
+        android:id="@+id/notification_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"/>
+
     <TextView
         android:id="@+id/notification_title"
         style="@style/TextAppearance.Compat.Notification.Title"
@@ -14,26 +20,10 @@
         android:layout_height="wrap_content"
         android:ellipsize="end"
         android:maxLines="1"
+        android:layout_below="@id/notification_header"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
         android:textSize="14sp"
         tool:text="Large notification, showing a title and a body." />
-
-    <Chronometer
-        android:id="@+id/notification_timer"
-        style="@style/TextAppearance.Compat.Notification.Line2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@id/notification_progress"
-        android:layout_alignTop="@+id/notification_progress"
-        android:layout_alignBottom="@+id/notification_progress"
-        android:layout_alignParentEnd="true"
-        android:layout_gravity="end"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="-4dp"
-        android:layout_marginEnd="39dp"
-        android:format="hh:mm:ss"
-        android:maxLines="1" />
 
     <TextView
         android:id="@+id/notification_subtitle"
@@ -46,14 +36,19 @@
         android:textSize="14sp"
         tool:text="Large notification, showing a title and a body." />
 
-    <ProgressBar
-        android:id="@+id/notification_progress"
+    <Chronometer
+        android:id="@+id/notification_timer"
+        android:textAppearance="@style/TextAppearance.Compat.Notification.Title"
         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-        android:layout_width="300dp"
-        android:layout_alignParentStart="true"
-        android:layout_toStartOf="@+id/notification_timer"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="70sp"
         android:layout_below="@id/notification_subtitle"
+        android:layout_alignParentStart="true"
         android:layout_marginTop="5dp"
-        android:indeterminate="false" />
+        android:format="hh:mm:ss"
+        android:textStyle="bold"
+        android:textFontWeight="700"
+        android:includeFontPadding="false"
+        android:indeterminate="false"
+        android:textSize="70sp" />
 </RelativeLayout>

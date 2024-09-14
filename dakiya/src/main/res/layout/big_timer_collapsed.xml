@@ -7,6 +7,7 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal">
 
+
     <TextView
         android:id="@+id/notification_title"
         style="@style/TextAppearance.Compat.Notification.Title"
@@ -21,17 +22,13 @@
 
     <Chronometer
         android:id="@+id/notification_timer"
-        style="@style/TextAppearance.Compat.Notification.Line2"
+        style="@style/TextAppearance.Compat.Notification.Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@id/notification_progress"
-        android:layout_alignTop="@+id/notification_progress"
-        android:layout_alignBottom="@+id/notification_progress"
+        android:layout_alignBaseline="@id/notification_subtitle"
         android:layout_alignParentEnd="true"
         android:layout_gravity="end"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="-4dp"
-        android:layout_marginEnd="39dp"
+        android:layout_marginEnd="16dp"
         android:format="hh:mm:ss"
         android:maxLines="1" />
 
@@ -40,20 +37,13 @@
         style="@style/TextAppearance.Compat.Notification.Line2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
         android:layout_below="@+id/notification_title"
+        android:layout_alignParentStart="true"
+        android:layout_toStartOf="@id/notification_timer"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="5dp"
         android:ellipsize="end"
+        android:maxLines="1"
         android:textSize="14sp"
         tool:text="Large notification, showing a title and a body." />
-
-    <ProgressBar
-        android:id="@+id/notification_progress"
-        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-        android:layout_width="300dp"
-        android:layout_alignParentStart="true"
-        android:layout_toStartOf="@+id/notification_timer"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/notification_subtitle"
-        android:layout_marginTop="5dp"
-        android:indeterminate="false" />
 </RelativeLayout>

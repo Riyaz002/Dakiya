@@ -1,6 +1,7 @@
 package com.riyaz.dakiya.core.util
 
 import android.app.NotificationManager
+import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
@@ -39,11 +40,16 @@ fun getImageBitmap(imageUrl: String?): Bitmap?{
     }
 }
 
-fun RemoteViews.performApiLevelConfiguration() {
+fun RemoteViews.performApiLevelConfiguration(remoteViews: RemoteViews? = null) {
     if(Build.VERSION.SDK_INT <= Build.VERSION_CODES.N){
         setViewPadding(R.id.ll_root,32, 32, 32,32)
+        val header = RemoteViews(Dakiya.getContext().packageName, R.layout.notification_header)
+        header.setTextViewText(R.id.tv_header, Dakiya.getContext().getAppName())
+        remoteViews?.addView(R.id.notification_header, header)
     }
 }
+
+fun Context.getAppName(): String = applicationInfo.loadLabel(packageManager).toString()
 
 fun getNotificationManager(): NotificationManager?{
     return if(Build.VERSION.SDK_INT > Build.VERSION_CODES.M){
