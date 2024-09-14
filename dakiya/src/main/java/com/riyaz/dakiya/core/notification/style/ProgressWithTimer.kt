@@ -42,6 +42,7 @@ internal class ProgressWithTimer: NotificationBuilderAssembler {
             .setWhen(message.timer.startedAt)
             .setAutoCancel(true)
             .setOnlyAlertOnce(true)
+            .setStyle(NotificationCompat.DecoratedCustomViewStyle())
 
         val notificationDeleteIntent = Intent(Dakiya.getContext(), NotificationEventReceiver::class.java).also {
             it.action = ACTION_DELETE
