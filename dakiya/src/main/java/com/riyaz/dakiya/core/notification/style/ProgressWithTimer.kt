@@ -25,12 +25,12 @@ import java.util.Date
 
 internal class ProgressWithTimer: NotificationBuilderAssembler {
     override fun assemble(message: Message): NotificationCompat.Builder {
-        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.O) throw DakiyaException("Minimum required API level for this style is 24")
+        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.N) throw DakiyaException("Minimum required API level for this style is 24")
         if(message.timer?.endAtString == null) throw DakiyaException("Timer is null")
 
         val endInMillis = endsInMillis(message.timer.endAtString)
         val startEpoch = message.timer.startedAt
-        val currentEpoch = Date().time.plus(4L * 60L * 60L * 1000L)
+        val currentEpoch = Date().time
         val endEpoch = currentEpoch + endInMillis
 
         if (currentEpoch > endEpoch) throw DakiyaException("Build after timeout")
