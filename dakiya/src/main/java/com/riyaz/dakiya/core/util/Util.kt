@@ -6,7 +6,6 @@ import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.os.Build
 import android.widget.RemoteViews
-import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat.getSystemService
 import com.riyaz.dakiya.Dakiya
 import com.riyaz.dakiya.R
@@ -53,9 +52,7 @@ fun getNotificationManager(): NotificationManager?{
 }
 
 
-@RequiresApi(Build.VERSION_CODES.O)
 fun endsInMillis(date: String): Long {
-
     val df: DateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'") // Quoted "Z" to indicate UTC, no timezone offset
     //df.timeZone = TimeZone.getDefault()
     val endDate = df.parse(date)
