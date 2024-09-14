@@ -13,7 +13,7 @@ internal class UpdateNotificationJob: JobService() {
     override fun onStartJob(params: JobParameters?): Boolean {
         val extras = params!!.extras
         val message = extras.toDakiyaMessage()
-        val notification = message.style.builderAssembler.assemble(message).build()
+        val notification = message.style.getAssembler().assemble(message).build()
         getNotificationManager()?.notify(message.id, notification)
         return true
     }
@@ -25,7 +25,6 @@ internal class UpdateNotificationJob: JobService() {
 
     companion object{
         private const val START_TIME = "start-time"
-
 
         fun PersistableBundle.toDakiyaMessage(): Message{
             return Message(
