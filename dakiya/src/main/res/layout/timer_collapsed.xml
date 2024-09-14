@@ -7,12 +7,6 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal">
 
-    <FrameLayout
-        android:id="@+id/notification_header"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"/>
-
     <TextView
         android:id="@+id/notification_title"
         style="@style/TextAppearance.Compat.Notification.Title"
@@ -20,7 +14,7 @@
         android:layout_height="wrap_content"
         android:ellipsize="end"
         android:maxLines="1"
-        android:layout_below="@id/notification_header"
+        android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
         android:textSize="14sp"
         tool:text="Large notification, showing a title and a body." />
