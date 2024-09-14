@@ -34,6 +34,8 @@ internal class BigTimer: NotificationBuilderAssembler {
             .setAutoCancel(true)
             .setOnlyAlertOnce(true)
             .setTimeoutAfter(endInMillis)
+            .setStyle(NotificationCompat.DecoratedCustomViewStyle())
+
 
         val collapsedView = RemoteViews(Dakiya.getContext().packageName, R.layout.timer_collapsed)
         collapsedView.performApiLevelConfiguration(collapsedView)

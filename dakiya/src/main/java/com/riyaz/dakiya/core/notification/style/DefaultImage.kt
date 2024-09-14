@@ -18,6 +18,7 @@ internal class DefaultImage: NotificationBuilderAssembler {
             .setContentText(message.subtitle)
             .setSmallIcon(message.smallIcon)
             .setAutoCancel(true)
+            .setStyle(NotificationCompat.DecoratedCustomViewStyle())
 
         val collapsedView = RemoteViews(Dakiya.getContext().packageName, R.layout.default_collapsed)
         collapsedView.performApiLevelConfiguration()
@@ -40,7 +41,7 @@ internal class DefaultImage: NotificationBuilderAssembler {
         }
 
         builder.setCustomBigContentView(expandedView)
-        builder.setStyle(NotificationCompat.DecoratedCustomViewStyle())
+
 
         return builder
     }
