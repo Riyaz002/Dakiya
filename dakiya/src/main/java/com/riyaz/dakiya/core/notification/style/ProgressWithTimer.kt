@@ -19,7 +19,6 @@ import com.riyaz.dakiya.core.util.DakiyaException
 import com.riyaz.dakiya.core.EventListener
 import com.riyaz.dakiya.core.util.endsInMillis
 import com.riyaz.dakiya.core.util.lightenColor
-import com.riyaz.dakiya.core.util.performApiLevelConfiguration
 import java.util.Date
 
 
@@ -68,7 +67,6 @@ internal class ProgressWithTimer: NotificationBuilderAssembler {
 
 
         val collapsedView = RemoteViews(Dakiya.getContext().packageName, R.layout.timer_collapsed)
-        collapsedView.performApiLevelConfiguration()
         collapsedView.setTextViewText(R.id.notification_title, message.title)
         collapsedView.setTextViewText(R.id.notification_subtitle, message.subtitle)
         collapsedView.setChronometerCountDown(R.id.notification_timer, true)
@@ -81,7 +79,6 @@ internal class ProgressWithTimer: NotificationBuilderAssembler {
 
         val expandedView =
             RemoteViews(Dakiya.getContext().packageName, R.layout.progress_timer_expanded)
-        expandedView.performApiLevelConfiguration()
         expandedView.setTextViewText(R.id.notification_title, message.title)
         expandedView.setTextViewText(R.id.notification_subtitle, message.subtitle)
         expandedView.setChronometerCountDown(R.id.notification_timer, true)

@@ -1,15 +1,12 @@
 package com.riyaz.dakiya.core.util
 
 import android.app.NotificationManager
-import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.os.Build
-import android.widget.RemoteViews
 import androidx.core.content.ContextCompat.getSystemService
 import com.riyaz.dakiya.Dakiya
-import com.riyaz.dakiya.R
 import org.json.JSONException
 import java.io.IOException
 import java.net.URL
@@ -26,11 +23,11 @@ fun Map<String, String?>.getOrNull(name: String): String?{
     }
 }
 
-fun getImageBitmap(imageUrl: String?): Bitmap?{
-    if(imageUrl == null) return null
+fun getImageBitmap(imageUrl: String?): Bitmap? {
+    if (imageUrl == null) return null
     try {
         val url = URL(imageUrl)
-        with(url.openConnection().getInputStream()){
+        with(url.openConnection().getInputStream()) {
             return BitmapFactory.decodeStream(this).also {
                 close()
             }
@@ -39,17 +36,6 @@ fun getImageBitmap(imageUrl: String?): Bitmap?{
         return null
     }
 }
-
-fun RemoteViews.performApiLevelConfiguration(remoteViews: RemoteViews? = null) {
-    if(Build.VERSION.SDK_INT <= Build.VERSION_CODES.N){
-        setViewPadding(R.id.ll_root,32, 32, 32,32)
-        val header = RemoteViews(Dakiya.getContext().packageName, R.layout.notification_header)
-        header.setTextViewText(R.id.tv_header, Dakiya.getContext().getAppName())
-        remoteViews?.addView(R.id.notification_header, header)
-    }
-}
-
-fun Context.getAppName(): String = applicationInfo.loadLabel(packageManager).toString()
 
 fun getNotificationManager(): NotificationManager?{
     return if(Build.VERSION.SDK_INT > Build.VERSION_CODES.M){
