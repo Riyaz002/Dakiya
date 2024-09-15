@@ -15,7 +15,7 @@ internal object EventListener {
             is Event.ScheduleUpdateNotificationJob -> {
                 if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
                     val jobScheduler = Dakiya.getContext().getSystemService(JobScheduler::class.java)
-                    if(jobScheduler.allPendingJobs.find { it.id == event.message.id }!=null){
+                    if(jobScheduler.allPendingJobs.find { it.id == event.message.id }==null){
                         val bundle = event.message.toPersistentBundle()
                         val jobInfo = JobInfo.Builder(event.message.id, ComponentName(Dakiya.getContext(), UpdateNotificationJob::class.java))
                             .setPeriodic(15*60*1000)
