@@ -11,10 +11,10 @@ import com.riyaz.dakiya.core.util.getNotificationManager
 
 internal class UpdateNotificationJob: JobService() {
     override fun onStartJob(params: JobParameters?): Boolean {
-        val extras = params!!.extras
-        val message = extras.toDakiyaMessage()
-        val notification = message.style.getAssembler().assemble(message).build()
-        getNotificationManager()?.notify(message.id, notification)
+        val extras = params?.extras
+        val message = extras?.toDakiyaMessage()
+        val notification = message?.style?.getAssembler()?.assemble(message)?.build()
+        message?.id?.let { getNotificationManager()?.notify(it, notification) }
         return true
     }
 
