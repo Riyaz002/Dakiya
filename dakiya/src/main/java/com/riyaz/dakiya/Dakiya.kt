@@ -8,10 +8,17 @@ import com.riyaz.dakiya.core.model.Message
 import com.riyaz.dakiya.core.util.DakiyaException
 import com.riyaz.dakiya.core.util.getNotificationManager
 import com.riyaz.dakiya.core.util.getOrNull
+import java.lang.ref.WeakReference
 
 object Dakiya {
 
-    fun getContext() = DakiyaApplication.getContext()
+    private var weakContextRef: WeakReference<Context>? = null
+    private val applicationContext: Context
+        get() = weakContextRef!!.get()!!
+    fun getContext() = applicationContext
+    fun init(context: Context){
+        weakContextRef = WeakReference(context.applicationContext)
+    }
 
     fun isDakiyaNotification(message: RemoteMessage): Boolean{
         return message.data.getOrNull(DAKIYA)?.toBoolean() == true
