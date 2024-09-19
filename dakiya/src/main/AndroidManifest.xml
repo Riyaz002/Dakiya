@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
-    <application android:name=".DakiyaApplication">
+    <application>
         <service android:name="com.riyaz.dakiya.core.service.UpdateNotificationJob"
             android:enabled="true"
             android:exported="false"
@@ -9,5 +9,11 @@
         <receiver android:name="com.riyaz.dakiya.core.reciever.NotificationEventReceiver"
             android:exported="false"
             android:enabled="true" />
+
+        <provider
+            android:authorities="com.dailyobjects.marche"
+            android:name=".core.provider.ContextProvider"
+            android:exported="false"
+            android:enabled="true"/>
     </application>
 </manifest>

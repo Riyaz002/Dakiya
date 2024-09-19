@@ -8,10 +8,14 @@ import com.riyaz.dakiya.core.model.Message
 import com.riyaz.dakiya.core.util.DakiyaException
 import com.riyaz.dakiya.core.util.getNotificationManager
 import com.riyaz.dakiya.core.util.getOrNull
+import kotlin.concurrent.thread
 
 object Dakiya {
-
-    fun getContext() = DakiyaApplication.getContext()
+    private lateinit var applicationContext: Context
+    fun getContext() = applicationContext
+    internal fun init(context: Context){
+        applicationContext = context.applicationContext
+    }
 
     fun isDakiyaNotification(message: RemoteMessage): Boolean{
         return message.data.getOrNull(DAKIYA)?.toBoolean() == true
@@ -31,9 +35,11 @@ object Dakiya {
     }
 
     fun showNotification(message: Message){
-        val result = prepareNotificationBuilder(message)
-        result.getOrNull()?.let { notificationBuilder ->
-            getNotificationManager()?.notify(message.id, notificationBuilder.build())
+        thread {
+            val result = prepareNotificationBuilder(message)
+            result.getOrNull()?.let { notificationBuilder ->
+                getNotificationManager()?.notify(message.id, notificationBuilder.build())
+            }
         }
     }
 }
