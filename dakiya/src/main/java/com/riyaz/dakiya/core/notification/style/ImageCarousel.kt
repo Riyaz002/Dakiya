@@ -41,41 +41,32 @@ internal class ImageCarousel : NotificationBuilderAssembler {
             carouselView.setImageViewBitmap(R.id.notification_carousel, bitmap)
             val notificationEventIntent = Intent(Dakiya.getContext(), NotificationEventReceiver::class.java)
             notificationEventIntent.putExtra(DATA, message.toBundle() as Bundle)
-
-            notificationEventIntent.action = NotificationEventReceiver.ACTION_BACKWARD
-            val backwardIntent = PendingIntent.getBroadcast(
-                Dakiya.getContext(),
-                11,
-                notificationEventIntent,
-                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE
-            )
-
-            notificationEventIntent.action = NotificationEventReceiver.ACTION_FORWARD
-            val forwardIntent = PendingIntent.getBroadcast(
-                Dakiya.getContext(),
-                11,
-                notificationEventIntent,
-                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE
-            )
-
-            carouselView.setOnClickPendingIntent(R.id.button_forward, forwardIntent)
+            var backwardIntent: PendingIntent? = null
+            var forwardIntent: PendingIntent? = null
+            if(message.carousel.currentIndex > 0){
+                notificationEventIntent.action = NotificationEventReceiver.ACTION_BACKWARD
+                backwardIntent = PendingIntent.getBroadcast(
+                    Dakiya.getContext(),
+                    11,
+                    notificationEventIntent,
+                    PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE
+                )
+                carouselView.setFloat(R.id.button_backward, "setAlpha", 1f)
+            } else carouselView.setFloat(R.id.button_backward, "setAlpha", 0.1f)
             carouselView.setOnClickPendingIntent(R.id.button_backward, backwardIntent)
-            expandedView.addView(R.id.bottom, carouselView)
 
-            if (message.carousel.dotActiveColor != null) {
-                List(message.carousel.images.size) { i ->
-                    expandedView.addView(
-                        R.id.ll_dots,
-                        RemoteViews(Dakiya.getContext().packageName, R.layout.dot).also {
-                            it.setInt(
-                                R.id.dot,
-                                "setBackgroundTint",
-                                if (i == message.carousel.currentIndex) Color.parseColor(message.carousel.dotActiveColor) else R.color.disabled
-                            )
-                        }
-                    )
-                }
-            }
+            if(message.carousel.currentIndex < message.carousel.images.size-1){
+                notificationEventIntent.action = NotificationEventReceiver.ACTION_FORWARD
+                forwardIntent = PendingIntent.getBroadcast(
+                    Dakiya.getContext(),
+                    11,
+                    notificationEventIntent,
+                    PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE
+                )
+                carouselView.setFloat(R.id.button_forward, "setAlpha", 1f)
+            } else carouselView.setFloat(R.id.button_forward, "setAlpha", 0.1f)
+            carouselView.setOnClickPendingIntent(R.id.button_forward, forwardIntent)
+            expandedView.addView(R.id.bottom, carouselView)
         }
 
         message.image?.let {
