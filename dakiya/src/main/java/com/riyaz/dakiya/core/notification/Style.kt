@@ -24,11 +24,11 @@ enum class Style(private val assemblerClass: KClass<out NotificationBuilderAssem
         @Throws(DakiyaException::class)
         fun String.getStyle(): Style {
             return when(this) {
-                DEFAULT.name -> DEFAULT
-                DEFAULT_IMAGE.name -> DEFAULT_IMAGE
-                IMAGE_CAROUSEL.name -> IMAGE_CAROUSEL
-                PROGRESS_TIMER.name -> PROGRESS_TIMER
-                BIG_TIMER.name -> BIG_TIMER
+                "DEFAULT" -> DEFAULT
+                "DEFAULT_IMAGE" -> DEFAULT_IMAGE
+                "IMAGE_CAROUSEL" -> IMAGE_CAROUSEL
+                "PROGRESS_TIMER" -> if(Build.VERSION_CODES.N <= Build.VERSION.SDK_INT) PROGRESS_TIMER else throw DakiyaException("No such style found: $this")
+                "BIG_TIMER" -> if(Build.VERSION_CODES.N <= Build.VERSION.SDK_INT) BIG_TIMER else throw DakiyaException("No such style found: $this")
                 else -> throw DakiyaException("No such style found: $this")
             }
         }
