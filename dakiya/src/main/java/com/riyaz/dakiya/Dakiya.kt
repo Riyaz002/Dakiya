@@ -8,16 +8,13 @@ import com.riyaz.dakiya.core.model.Message
 import com.riyaz.dakiya.core.util.DakiyaException
 import com.riyaz.dakiya.core.util.getNotificationManager
 import com.riyaz.dakiya.core.util.getOrNull
-import java.lang.ref.WeakReference
+import kotlin.concurrent.thread
 
 object Dakiya {
-
-    private var weakContextRef: WeakReference<Context>? = null
-    private val applicationContext: Context
-        get() = weakContextRef!!.get()!!
+    private lateinit var applicationContext: Context
     fun getContext() = applicationContext
-    fun init(context: Context){
-        weakContextRef = WeakReference(context.applicationContext)
+    internal fun init(context: Context){
+        applicationContext = context.applicationContext
     }
 
     fun isDakiyaNotification(message: RemoteMessage): Boolean{
@@ -38,9 +35,11 @@ object Dakiya {
     }
 
     fun showNotification(message: Message){
-        val result = prepareNotificationBuilder(message)
-        result.getOrNull()?.let { notificationBuilder ->
-            getNotificationManager()?.notify(message.id, notificationBuilder.build())
+        thread {
+            val result = prepareNotificationBuilder(message)
+            result.getOrNull()?.let { notificationBuilder ->
+                getNotificationManager()?.notify(message.id, notificationBuilder.build())
+            }
         }
     }
 }

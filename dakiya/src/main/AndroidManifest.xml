@@ -9,5 +9,11 @@
         <receiver android:name="com.riyaz.dakiya.core.reciever.NotificationEventReceiver"
             android:exported="false"
             android:enabled="true" />
+
+        <provider
+            android:authorities="com.dailyobjects.marche"
+            android:name=".core.provider.ContextProvider"
+            android:exported="false"
+            android:enabled="true"/>
     </application>
 </manifest>

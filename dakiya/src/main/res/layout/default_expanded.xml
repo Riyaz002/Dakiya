@@ -33,4 +33,9 @@
         android:visibility="gone"
         android:layout_weight="1"
         tool:text="This is the body. The height is manually forced to 300dp." />
+
+    <FrameLayout
+        android:id="@+id/bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 </LinearLayout>
