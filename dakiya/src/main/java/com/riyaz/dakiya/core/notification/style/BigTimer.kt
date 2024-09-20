@@ -28,7 +28,6 @@ internal class BigTimer: NotificationBuilderAssembler {
         val builder = NotificationCompat.Builder(Dakiya.getContext(), message.channel)
             .setContentTitle(message.title)
             .setContentText(message.subtitle)
-            .setSmallIcon(message.smallIcon)
             .setWhen(message.timer.startedAt)
             .setAutoCancel(true)
             .setOnlyAlertOnce(true)

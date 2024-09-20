@@ -15,7 +15,7 @@ internal class NotificationEventReceiver: BroadcastReceiver() {
     override fun onReceive(context: Context?, intent: Intent?) {
         when(intent?.action){
             ACTION_DELETE -> {
-                val jobId = intent.extras?.getInt(ID)
+                val jobId = intent.extras?.getInt(Message.ID)
                 val jobScheduler = getSystemService(context!!, JobScheduler::class.java)
                 if (jobId != null) {
                     jobScheduler?.cancel(jobId)
@@ -42,7 +42,6 @@ internal class NotificationEventReceiver: BroadcastReceiver() {
         const val ACTION_FORWARD = "forward"
         const val ACTION_BACKWARD = "backward"
         const val DATA = "data"
-        const val ID = Message.ID
         const val REQUEST_CODE = 12
     }
 }

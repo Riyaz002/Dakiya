@@ -3,11 +3,14 @@ package com.riyaz.dakiya.core.model
 import android.os.BaseBundle
 import android.os.Bundle
 import com.google.firebase.messaging.RemoteMessage
+import com.riyaz.dakiya.core.model.Carousel.Companion.add
+import com.riyaz.dakiya.core.model.Timer.Companion.add
+import com.riyaz.dakiya.core.model.Carousel.Companion.getCarousel
+import com.riyaz.dakiya.core.model.Timer.Companion.getTimer
 import com.riyaz.dakiya.core.notification.Style
 import com.riyaz.dakiya.core.notification.Style.Companion.getStyle
 import com.riyaz.dakiya.core.util.DakiyaException
 import com.riyaz.dakiya.core.util.getOrNull
-import java.util.Date
 import kotlin.random.Random
 
 data class Message(
@@ -16,43 +19,43 @@ data class Message(
     val subtitle: String? = null,
     val image: String? = null,
     val style: Style = Style.DEFAULT,
-    val smallIcon: Int,
     val channel: String = "default",
     val timer: Timer? = null,
     val themeColor: String? = null,
-    val carousel: Carousel? = null
+    val carousel: Carousel? = null,
+    val cta: String? = null,
+    val button1: String? = null,
+    val button2: String? = null,
+    val button3: String? = null,
 ){
     companion object{
         const val ID = "id"
-        const val TITLE = "title"
-        const val SUBTITLE = "subtitle"
-        const val IMAGE = "image"
-        const val STYLE = "style"
-        const val SMALL_ICON = "small_icon"
-        const val TIME = "time" //uses this format "2024-09-08T12:34:56.OOOZ"
-        const val COLOR = "color"
-        const val CURRENT_INDEX = "current_index"
-        const val IMAGES = "images"
-        const val DOT_COLOR = "dot_color"
-        const val START_TIME = "start_time"
-        const val CHANNEL = "channel"
+        private const val TITLE = "title"
+        private const val SUBTITLE = "subtitle"
+        private const val IMAGE = "image"
+        private const val STYLE = "style"
+        private const val COLOR = "color"
+        private const val CTA = "cta"
+        private const val BUTTON_1 = "button1"
+        private const val BUTTON_2 = "button2"
+        private const val BUTTON_3 = "button3"
+        private const val CHANNEL = "channel"
 
         fun BaseBundle.toDakiyaMessage(): Message{
             return Message(
-                getInt(ID),
-                getString(TITLE)!!,
-                getString(SUBTITLE),
-                getString(IMAGE),
-                getString(STYLE)!!.getStyle(),
-                getInt(SMALL_ICON),
-                getString(CHANNEL)!!,
-                Timer(getLong(START_TIME), getString(TIME)!!),
-                getString(COLOR),
-                carousel = Carousel(
-                    getInt(CURRENT_INDEX),
-                    getString(IMAGES)!!.split(","),
-                    getString(DOT_COLOR)
-                )
+                id = getInt(ID),
+                title = getString(TITLE)!!,
+                subtitle = getString(SUBTITLE),
+                image = getString(IMAGE),
+                style = getString(STYLE)!!.getStyle(),
+                channel = getString(CHANNEL)!!,
+                timer = getTimer(),
+                themeColor = getString(COLOR),
+                carousel = this.getCarousel(),
+                cta = getString(CTA),
+                button1 = getString(BUTTON_1),
+                button2 = getString(BUTTON_2),
+                button3 = getString(BUTTON_3)
             )
         }
 
@@ -63,35 +66,32 @@ data class Message(
             bundle.putString(SUBTITLE, subtitle)
             bundle.putString(IMAGE, image)
             bundle.putString(STYLE, style.name)
-            bundle.putInt(SMALL_ICON, smallIcon)
             bundle.putString(CHANNEL, channel)
-            bundle.putString(TIME, timer?.endAtString)
-            bundle.putLong(START_TIME, System.currentTimeMillis())
             bundle.putString(COLOR, themeColor)
-            carousel?.run {
-                bundle.putString(IMAGES, images?.joinToString(","))
-                currentIndex.let { bundle.putInt(CURRENT_INDEX, it) }
-                dotActiveColor.let { bundle.putString(DOT_COLOR, it) }
-            }
+            bundle.putString(CTA, cta)
+            bundle.putString(BUTTON_1, button1)
+            bundle.putString(BUTTON_2, button2)
+            bundle.putString(BUTTON_3, button3)
+            bundle add timer
+            bundle add carousel
             return bundle
         }
 
         @Throws(DakiyaException::class)
-        fun RemoteMessage.toDakiyaMessage(channel: String, smallIcon: Int, notificationId: Int? = null) = Message(
+        fun RemoteMessage.toDakiyaMessage(notificationId: Int? = null) = Message(
             id = notificationId ?: Random(10000).nextInt(),
             title = data.getOrNull(TITLE)!!,
             subtitle = data.getOrNull(SUBTITLE),
             image = data.getOrNull(IMAGE),
             style = data.getOrNull(STYLE)?.getStyle() ?: Style.DEFAULT,
-            smallIcon = smallIcon,
-            channel = channel,
-            timer = data.getOrNull(TIME)?.run { Timer(Date().time, this) },
+            channel = data.getOrNull(CHANNEL)?:"default",
+            timer = getTimer(),
             themeColor = data.getOrNull(COLOR),
-            carousel = if(data.getOrNull(IMAGES)!=null) Carousel(
-                data.getOrNull(CURRENT_INDEX)?.toInt() ?: 0,
-                data.getOrNull(IMAGES)?.split(","),
-                data.getOrNull(DOT_COLOR),
-            ) else null
+            carousel = getCarousel(),
+            cta = data.getOrNull(CTA),
+            button1 = data.getOrNull(BUTTON_1),
+            button2 = data.getOrNull(BUTTON_2),
+            button3 = data.getOrNull(BUTTON_3),
         )
     }
 }

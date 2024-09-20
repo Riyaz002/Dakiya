@@ -41,7 +41,6 @@
         android:layout_marginTop="5dp"
         android:format="hh:mm:ss"
         android:textStyle="bold"
-        android:textFontWeight="700"
         android:includeFontPadding="false"
         android:indeterminate="false"
         android:textSize="70sp" />

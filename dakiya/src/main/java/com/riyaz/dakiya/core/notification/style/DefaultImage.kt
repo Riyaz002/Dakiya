@@ -15,7 +15,6 @@ internal class DefaultImage: NotificationBuilderAssembler {
         val builder = NotificationCompat.Builder(Dakiya.getContext(), message.channel)
             .setContentTitle(message.title)
             .setContentText(message.subtitle)
-            .setSmallIcon(message.smallIcon)
             .setAutoCancel(true)
             .setStyle(NotificationCompat.DecoratedCustomViewStyle())
 
