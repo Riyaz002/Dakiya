@@ -16,16 +16,16 @@ import java.util.Date
 
 internal class BigTimer: NotificationBuilderAssembler {
     override fun assemble(message: Message): NotificationCompat.Builder {
-        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.N) throw DakiyaException("Minimum required API level for this style is 24")
-        if(message.timer?.endAtString == null) throw DakiyaException("Timer is null")
+        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.N) throw DakiyaException.MinimumApiRequirementException(Build.VERSION_CODES.N)
+        if(message.timer?.endAtString == null) throw DakiyaException.RequiredFieldNullException(Message::timer.name)
 
         val endInMillis = endsInMillis(message.timer.endAtString)
         val currentEpoch = Date().time
         val endEpoch = currentEpoch + endInMillis
 
-        if (currentEpoch > endEpoch) throw DakiyaException("Build after timeout")
+        if (currentEpoch > endEpoch) throw DakiyaException.BuildAfterTimerEndException()
 
-        val builder = NotificationCompat.Builder(Dakiya.getContext(), message.channel)
+        val builder = NotificationCompat.Builder(Dakiya.getContext(), message.channelID)
             .setContentTitle(message.title)
             .setContentText(message.subtitle)
             .setWhen(message.timer.startedAt)
@@ -68,5 +68,4 @@ internal class BigTimer: NotificationBuilderAssembler {
         builder.setCustomBigContentView(expandedView)
         return builder
     }
-
 }

@@ -17,6 +17,7 @@ import com.riyaz.dakiya.core.model.Message
 import com.riyaz.dakiya.core.notification.NotificationBuilderAssembler
 import com.riyaz.dakiya.core.util.DakiyaException
 import com.riyaz.dakiya.core.EventListener
+import com.riyaz.dakiya.core.model.Timer
 import com.riyaz.dakiya.core.util.endsInMillis
 import com.riyaz.dakiya.core.util.lightenColor
 import java.util.Date
@@ -24,17 +25,17 @@ import java.util.Date
 
 internal class ProgressWithTimer: NotificationBuilderAssembler {
     override fun assemble(message: Message): NotificationCompat.Builder {
-        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.N) throw DakiyaException("Minimum required API level for this style is 24")
-        if(message.timer?.endAtString == null) throw DakiyaException("Timer is null")
+        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.N) throw DakiyaException.MinimumApiRequirementException(Build.VERSION_CODES.N)
+        if(message.timer?.endAtString == null) throw DakiyaException.RequiredFieldNullException(Timer::endAtString.name)
 
         val endInMillis = endsInMillis(message.timer.endAtString)
         val startEpoch = message.timer.startedAt
         val currentEpoch = Date().time
         val endEpoch = currentEpoch + endInMillis
 
-        if (currentEpoch > endEpoch) throw DakiyaException("Build after timeout")
+        if (currentEpoch > endEpoch) throw DakiyaException.BuildAfterTimerEndException()
 
-        val builder = NotificationCompat.Builder(Dakiya.getContext(), message.channel)
+        val builder = NotificationCompat.Builder(Dakiya.getContext(), message.channelID)
             .setContentTitle(message.title)
             .setContentText(message.subtitle)
             .setWhen(message.timer.startedAt)

@@ -12,7 +12,7 @@ import com.riyaz.dakiya.core.util.getImageBitmap
 
 internal class DefaultImage: NotificationBuilderAssembler {
     override fun assemble(message: Message): NotificationCompat.Builder {
-        val builder = NotificationCompat.Builder(Dakiya.getContext(), message.channel)
+        val builder = NotificationCompat.Builder(Dakiya.getContext(), message.channelID)
             .setContentTitle(message.title)
             .setContentText(message.subtitle)
             .setAutoCancel(true)

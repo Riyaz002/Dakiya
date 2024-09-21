@@ -2,26 +2,27 @@ package com.riyaz.dakiya.core.notification.style
 
 import android.app.PendingIntent
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
 import com.riyaz.dakiya.Dakiya
 import com.riyaz.dakiya.R
+import com.riyaz.dakiya.core.model.Carousel
 import com.riyaz.dakiya.core.model.Message
 import com.riyaz.dakiya.core.model.Message.Companion.toBundle
 import com.riyaz.dakiya.core.notification.NotificationBuilderAssembler
 import com.riyaz.dakiya.core.reciever.NotificationEventReceiver
 import com.riyaz.dakiya.core.reciever.NotificationEventReceiver.Companion.DATA
+import com.riyaz.dakiya.core.util.DakiyaException
 import com.riyaz.dakiya.core.util.getImageBitmap
 
 internal class ImageCarousel : NotificationBuilderAssembler {
     override fun assemble(message: Message): NotificationCompat.Builder {
-        val builder = NotificationCompat.Builder(Dakiya.getContext(), message.channel)
+        if(message.carousel?.images.isNullOrEmpty()) throw DakiyaException.RequiredFieldNullException(Carousel::images.name)
+        val builder = NotificationCompat.Builder(Dakiya.getContext(), message.channelID)
             .setContentTitle(message.title)
             .setContentText(message.subtitle)
-            
             .setAutoCancel(true)
             .setStyle(NotificationCompat.DecoratedCustomViewStyle())
             .setOnlyAlertOnce(true)

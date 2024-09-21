@@ -19,7 +19,7 @@ data class Message(
     val subtitle: String? = null,
     val image: String? = null,
     val style: Style = Style.DEFAULT,
-    val channel: String = "default",
+    val channelID: String = "default",
     val timer: Timer? = null,
     val themeColor: String? = null,
     val carousel: Carousel? = null,
@@ -48,7 +48,7 @@ data class Message(
                 subtitle = getString(SUBTITLE),
                 image = getString(IMAGE),
                 style = getString(STYLE)!!.getStyle(),
-                channel = getString(CHANNEL)!!,
+                channelID = getString(CHANNEL)!!,
                 timer = getTimer(),
                 themeColor = getString(COLOR),
                 carousel = getCarousel(),
@@ -66,7 +66,7 @@ data class Message(
             bundle.putString(SUBTITLE, subtitle)
             bundle.putString(IMAGE, image)
             bundle.putString(STYLE, style.name)
-            bundle.putString(CHANNEL, channel)
+            bundle.putString(CHANNEL, channelID)
             bundle.putString(COLOR, themeColor)
             bundle.putString(CTA, cta)
             bundle.putString(BUTTON_1, button1)
@@ -84,7 +84,7 @@ data class Message(
             subtitle = data.getOrNull(SUBTITLE),
             image = data.getOrNull(IMAGE),
             style = data.getOrNull(STYLE)?.getStyle() ?: Style.DEFAULT,
-            channel = data.getOrNull(CHANNEL) ?: throw DakiyaException("No channel id found"),
+            channelID = data.getOrNull(CHANNEL) ?: throw DakiyaException.RequiredFieldNullException(Message::channelID.name),
             timer = getTimer(),
             themeColor = data.getOrNull(COLOR),
             carousel = getCarousel(),
