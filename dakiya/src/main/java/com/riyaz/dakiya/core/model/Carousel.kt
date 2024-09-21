@@ -14,7 +14,7 @@ data class Carousel(
         private const val IMAGES = "images"
         private const val DOT_COLOR = "dot_color"
 
-        infix fun BaseBundle.add(carousel: Carousel?){
+        fun BaseBundle.putCarousel(carousel: Carousel?){
             if(carousel == null) return
             putInt(CURRENT_INDEX, carousel.currentIndex)
             putString(IMAGES, carousel.images?.joinToString(","))

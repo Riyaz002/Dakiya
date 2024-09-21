@@ -3,10 +3,10 @@ package com.riyaz.dakiya.core.model
 import android.os.BaseBundle
 import android.os.Bundle
 import com.google.firebase.messaging.RemoteMessage
-import com.riyaz.dakiya.core.model.Carousel.Companion.add
-import com.riyaz.dakiya.core.model.Timer.Companion.add
 import com.riyaz.dakiya.core.model.Carousel.Companion.getCarousel
+import com.riyaz.dakiya.core.model.Carousel.Companion.putCarousel
 import com.riyaz.dakiya.core.model.Timer.Companion.getTimer
+import com.riyaz.dakiya.core.model.Timer.Companion.putTimer
 import com.riyaz.dakiya.core.notification.Style
 import com.riyaz.dakiya.core.notification.Style.Companion.getStyle
 import com.riyaz.dakiya.core.util.DakiyaException
@@ -72,8 +72,8 @@ data class Message(
             bundle.putString(BUTTON_1, button1)
             bundle.putString(BUTTON_2, button2)
             bundle.putString(BUTTON_3, button3)
-            bundle add timer
-            bundle add carousel
+            bundle.putTimer(timer)
+            bundle.putCarousel(carousel)
             return bundle
         }
 

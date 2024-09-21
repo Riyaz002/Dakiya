@@ -12,7 +12,7 @@ data class Timer(
         private const val TIME = "time" //uses this format "2024-09-08T12:34:56.OOOZ"
         private const val START_TIME = "start_time"
 
-        infix fun BaseBundle.add(timer: Timer?){
+        fun BaseBundle.putTimer(timer: Timer?){
             if (timer == null) return
             putString(TIME, timer.endAtString)
             putLong(START_TIME, timer.startedAt)
