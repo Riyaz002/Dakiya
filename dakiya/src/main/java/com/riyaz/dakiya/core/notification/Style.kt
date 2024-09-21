@@ -27,9 +27,9 @@ enum class Style(private val assemblerClass: KClass<out NotificationBuilderAssem
                 "DEFAULT" -> DEFAULT
                 "DEFAULT_IMAGE" -> DEFAULT_IMAGE
                 "IMAGE_CAROUSEL" -> IMAGE_CAROUSEL
-                "PROGRESS_TIMER" -> if(Build.VERSION_CODES.N <= Build.VERSION.SDK_INT) PROGRESS_TIMER else throw DakiyaException("No such style found: $this")
-                "BIG_TIMER" -> if(Build.VERSION_CODES.N <= Build.VERSION.SDK_INT) BIG_TIMER else throw DakiyaException("No such style found: $this")
-                else -> throw DakiyaException("No such style found: $this")
+                "PROGRESS_TIMER" -> if(Build.VERSION_CODES.N <= Build.VERSION.SDK_INT) PROGRESS_TIMER else throw DakiyaException.NoStyleFoundException(this)
+                "BIG_TIMER" -> if(Build.VERSION_CODES.N <= Build.VERSION.SDK_INT) BIG_TIMER else throw DakiyaException.NoStyleFoundException(this)
+                else -> throw DakiyaException.NoStyleFoundException(this)
             }
         }
     }
