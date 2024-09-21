@@ -9,7 +9,8 @@
         <ImageView
             android:id="@+id/notification_carousel"
             android:layout_height="match_parent"
-            android:layout_width="match_parent" />
+            android:layout_width="match_parent"
+            android:contentDescription="@string/banner"/>
 
         <ImageButton
             android:id="@+id/button_backward"
@@ -17,6 +18,7 @@
             android:layout_height="44dp"
             android:layout_margin="16dp"
             android:rotation="180"
+            android:contentDescription="@string/backward_button"
             android:background="@drawable/circle_shape"
             android:src="@drawable/baseline_arrow_24"
             android:backgroundTint="@color/disabled"
@@ -28,6 +30,7 @@
             android:layout_width="44dp"
             android:layout_height="44dp"
             android:layout_margin="16dp"
+            android:contentDescription="@string/forward_button"
             android:background="@drawable/circle_shape"
             android:src="@drawable/baseline_arrow_24"
             android:layout_alignParentEnd="true"

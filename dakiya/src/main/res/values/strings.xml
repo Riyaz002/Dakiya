@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Dakiya</string>
     <string name="notification_image">notification image</string>
+    <string name="backward_button">backward button</string>
+    <string name="forward_button">forward button</string>
+    <string name="banner">banner</string>
 </resources>
