@@ -22,7 +22,7 @@ object Dakiya {
     internal fun init(context: Context){
         val ai: ApplicationInfo = context.packageManager.getApplicationInfo(context.packageName, PackageManager.GET_META_DATA)
         val bundle = ai.metaData
-        val iconId = bundle.getInt("Notification_Small_Icon")
+        val iconId = bundle.getInt("com.riyaz.dakiya.Notification_Small_Icon")
         if(iconId == 0) throw DakiyaException.MetaTagNotFoundException("Notification_Small_Icon")
         else _smallIcon = iconId
         applicationContext = context.applicationContext
