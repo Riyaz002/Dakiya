@@ -29,7 +29,7 @@ In your manifest file. Set the notification small icon.
 ```xml
 	<meta-data 
 		android:name="com.riyaz.dakiya.Notification_Small_Icon"
-		android:value="@drawable/your_notification_small_icon"
+		android:resource="@drawable/your_notification_small_icon"
 	/>
 ```
 
