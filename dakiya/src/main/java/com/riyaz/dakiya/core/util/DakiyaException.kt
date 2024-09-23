@@ -6,4 +6,5 @@ internal sealed class DakiyaException private constructor(override val message: 
     class BuildAfterTimerEndException(override val message: String = "Builder after timer end"): DakiyaException(message)
     class ChannelIDNullException(override val message: String = "No channel ID passed"): DakiyaException(message)
     class NoStyleFoundException(private val style: String): DakiyaException("No such style found: $style")
+    class MetaTagNotFoundException(private val propertyName: String): DakiyaException("No meta tag found for $propertyName")
 }
