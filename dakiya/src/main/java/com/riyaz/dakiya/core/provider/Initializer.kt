@@ -5,7 +5,7 @@ import android.content.ContentValues
 import android.net.Uri
 import com.riyaz.dakiya.Dakiya
 
-class ContextProvider: ContentProvider() {
+class Initializer: ContentProvider() {
     override fun onCreate(): Boolean {
         Dakiya.init(context!!)
         return true

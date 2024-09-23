@@ -12,7 +12,7 @@
 
         <provider
             android:authorities="com.dailyobjects.marche"
-            android:name=".core.provider.ContextProvider"
+            android:name=".core.provider.Initializer"
             android:exported="false"
             android:enabled="true"/>
     </application>
