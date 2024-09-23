@@ -24,6 +24,7 @@ internal class ImageCarousel : NotificationBuilderAssembler {
             .setContentTitle(message.title)
             .setContentText(message.subtitle)
             .setAutoCancel(true)
+            .setSmallIcon(Dakiya.smallIcon)
             .setStyle(NotificationCompat.DecoratedCustomViewStyle())
             .setOnlyAlertOnce(true)
 

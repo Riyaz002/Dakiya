@@ -40,6 +40,7 @@ internal class ProgressWithTimer: NotificationBuilderAssembler {
             .setContentText(message.subtitle)
             .setWhen(message.timer.startedAt)
             .setAutoCancel(true)
+            .setSmallIcon(Dakiya.smallIcon)
             .setOnlyAlertOnce(true)
             .setStyle(NotificationCompat.DecoratedCustomViewStyle())
 
