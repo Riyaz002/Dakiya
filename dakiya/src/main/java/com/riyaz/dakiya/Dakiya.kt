@@ -1,6 +1,8 @@
 package com.riyaz.dakiya
 
 import android.content.Context
+import android.content.pm.ApplicationInfo
+import android.content.pm.PackageManager
 import androidx.core.app.NotificationCompat
 import com.google.firebase.messaging.RemoteMessage
 import com.riyaz.dakiya.core.Constant.DAKIYA
@@ -10,10 +12,23 @@ import com.riyaz.dakiya.core.util.getNotificationManager
 import com.riyaz.dakiya.core.util.getOrNull
 import kotlin.concurrent.thread
 
+
 object Dakiya {
     private lateinit var applicationContext: Context
     fun getContext() = applicationContext
+    private var _smallIcon: Int? = null
+    internal val smallIcon: Int get() = _smallIcon!!
+
     internal fun init(context: Context){
+        try {
+            val ai: ApplicationInfo =
+                context.packageManager.getApplicationInfo(context.packageName, PackageManager.GET_META_DATA)
+            val bundle = ai.metaData
+            val iconId = bundle.getInt("Notification_Small_Icon")
+            if(iconId == 0) throw DakiyaException.MetaTagNotFoundException("Notification_Small_Icon")
+            else _smallIcon = iconId
+        } catch (e: Exception) {}
+
         applicationContext = context.applicationContext
     }
 

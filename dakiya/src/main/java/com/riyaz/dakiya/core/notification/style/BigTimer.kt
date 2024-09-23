@@ -31,6 +31,7 @@ internal class BigTimer: NotificationBuilderAssembler {
             .setWhen(message.timer.startedAt)
             .setAutoCancel(true)
             .setOnlyAlertOnce(true)
+            .setSmallIcon(Dakiya.smallIcon)
             .setTimeoutAfter(endInMillis)
             .setStyle(NotificationCompat.DecoratedCustomViewStyle())
 
