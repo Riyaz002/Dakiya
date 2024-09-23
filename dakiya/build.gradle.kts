@@ -1,3 +1,5 @@
+import groovy.xml.XmlParser
+
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
@@ -61,4 +63,36 @@ afterEvaluate {
             }
         }
     }
+}
+
+tasks.register("checkMetaData") {
+    doLast {
+        val manifestFile = file("src/main/AndroidManifest.xml")
+        if (!manifestFile.exists()) {
+            return@doLast
+        }
+
+        // Parse the AndroidManifest.xml with namespace awareness disabled
+        val parser = XmlParser()
+        parser.setFeature("http://xml.org/sax/features/namespaces", false)
+        val manifest = parser.parse(manifestFile)
+
+        // Access the <application> tag as a Node
+        val applicationTag = ((manifest as groovy.util.Node).get("application") as List<*>?)?.firstOrNull() ?: return@doLast
+
+        // Cast applicationTag to Node for safe XML traversal
+        val applicationNode = applicationTag as groovy.util.Node
+
+        // Check for the <meta-data> tag by name
+        val metaDataName = "com.riyaz.dakiya.Notification_Small_Icon"
+        val metaDataTag = applicationNode.children()
+            .filterIsInstance<groovy.util.Node>()
+            .find { it.attribute("android:name") == metaDataName }
+
+        if (metaDataTag == null) error("<meta-data> tag for $metaDataName not found read Dakiya documentation")
+    }
+}
+
+tasks.named("build") {
+    dependsOn("checkMetaData")
 }
