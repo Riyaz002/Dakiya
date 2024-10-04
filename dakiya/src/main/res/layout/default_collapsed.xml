@@ -11,9 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_marginVertical="10dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="10dp"
+        android:layout_centerVertical="true"
         android:layout_toStartOf="@+id/notification_image"
         android:orientation="vertical">
 
@@ -29,10 +28,8 @@
 
         <TextView
             android:id="@+id/notification_body"
-            style="@style/TextAppearance.Compat.Notification.Info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
             android:ellipsize="end"
             android:maxLines="1"
             tool:text="This is the body. The height is manually forced to 300dp." />

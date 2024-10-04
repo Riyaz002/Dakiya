@@ -17,6 +17,5 @@
             android:exported="false"
             android:enabled="true"/>
 
-        <meta-data android:name="com.riyaz.dakiya.Notification_Small_Icon" android:resource="@color/white" tools:node="replace"/>
     </application>
 </manifest>

@@ -9,6 +9,7 @@ appcompat = "1.7.0"
 material = "1.12.0"
 firebaseMessagingKtx = "24.0.1"
 runner = "1.6.2"
+roboelectric = "4.13"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -20,8 +21,8 @@ material = { group = "com.google.android.material", name = "material", version.r
 firebase-messaging-ktx = { group = "com.google.firebase", name = "firebase-messaging-ktx", version.ref = "firebaseMessagingKtx" }
 androidx-runner = { group = "androidx.test", name = "runner", version.ref = "runner" }
 kotlin-reflect = { group = "org.jetbrains.kotlin", name = "kotlin-reflect", version.ref = "kotlin" }
+roboelectric = { group = "org.robolectric", name = "robolectric", version.ref = "roboelectric" }
 
 [plugins]
 android-library = { id = "com.android.library", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-maven-publish = { id = "maven.publish" }

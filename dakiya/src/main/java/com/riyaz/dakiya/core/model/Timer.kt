@@ -10,7 +10,7 @@ data class Timer(
 ) {
     companion object {
         private const val TIME = "time" //uses this format "2024-09-08T12:34:56.000Z"
-        private const val START_TIME = "start_time"
+        const val START_TIME = "start_time"
 
         fun BaseBundle.putTimer(timer: Timer?){
             if (timer == null) return

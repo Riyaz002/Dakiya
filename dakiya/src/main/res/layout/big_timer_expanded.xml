@@ -16,18 +16,14 @@
         android:maxLines="1"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:textSize="14sp"
         tool:text="Large notification, showing a title and a body." />
 
     <TextView
         android:id="@+id/notification_subtitle"
-        style="@style/TextAppearance.Compat.Notification.Line2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
         android:layout_below="@+id/notification_title"
         android:ellipsize="end"
-        android:textSize="14sp"
         tool:text="Large notification, showing a title and a body." />
 
     <Chronometer
@@ -35,6 +31,7 @@
         android:textAppearance="@style/TextAppearance.Compat.Notification.Title"
         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
         android:layout_width="match_parent"
+        android:textAlignment="center"
         android:layout_height="70sp"
         android:layout_below="@id/notification_subtitle"
         android:layout_alignParentStart="true"

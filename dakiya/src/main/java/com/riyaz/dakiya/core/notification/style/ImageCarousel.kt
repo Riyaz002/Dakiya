@@ -3,7 +3,6 @@ package com.riyaz.dakiya.core.notification.style
 import android.app.PendingIntent
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
 import com.riyaz.dakiya.Dakiya
@@ -69,15 +68,6 @@ internal class ImageCarousel : NotificationBuilderAssembler {
             } else carouselView.setFloat(R.id.button_forward, "setAlpha", 0.1f)
             carouselView.setOnClickPendingIntent(R.id.button_forward, forwardIntent)
             expandedView.addView(R.id.bottom, carouselView)
-        }
-
-        message.image?.let {
-            val image = getImageBitmap(it)
-            expandedView.setViewVisibility(R.id.notification_image, View.VISIBLE)
-            expandedView.setImageViewBitmap(R.id.notification_image, image)
-
-            collapsedView.setViewVisibility(R.id.notification_image, View.VISIBLE)
-            collapsedView.setImageViewBitmap(R.id.notification_image, image)
         }
 
         builder.setCustomBigContentView(expandedView)
