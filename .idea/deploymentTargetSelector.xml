@@ -8,9 +8,6 @@
       <SelectionState runConfigName="BigTimerTest">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="buildingWithPastTime_throwsException()">
-        <option name="selectionMode" value="DROPDOWN" />
-      </SelectionState>
       <SelectionState runConfigName="buildingWithNullTimer_throwsException()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
