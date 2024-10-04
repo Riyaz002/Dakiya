@@ -1,5 +1,3 @@
-import groovy.xml.XmlParser
-
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
@@ -50,4 +48,5 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     implementation(libs.kotlin.reflect)
     testImplementation(libs.kotlin.reflect)
+    testImplementation(libs.roboelectric)
 }

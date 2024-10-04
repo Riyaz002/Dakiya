@@ -2,6 +2,7 @@ package com.riyaz.dakiya.core.model
 
 import android.os.BaseBundle
 import android.os.Bundle
+import android.os.PersistableBundle
 import com.google.firebase.messaging.RemoteMessage
 import com.riyaz.dakiya.core.model.Carousel.Companion.getCarousel
 import com.riyaz.dakiya.core.model.Carousel.Companion.putCarousel
@@ -77,9 +78,27 @@ data class Message(
             return bundle
         }
 
+        fun Message.toPersistableBundle(): PersistableBundle {
+            val bundle = PersistableBundle()
+            bundle.putInt(ID, id)
+            bundle.putString(TITLE, title)
+            bundle.putString(SUBTITLE, subtitle)
+            bundle.putString(IMAGE, image)
+            bundle.putString(STYLE, style.name)
+            bundle.putString(CHANNEL, channelID)
+            bundle.putString(COLOR, themeColor)
+            bundle.putString(CTA, cta)
+            bundle.putString(BUTTON_1, button1)
+            bundle.putString(BUTTON_2, button2)
+            bundle.putString(BUTTON_3, button3)
+            bundle.putTimer(timer)
+            bundle.putCarousel(carousel)
+            return bundle
+        }
+
         @Throws(DakiyaException::class)
         fun RemoteMessage.toDakiyaMessage(notificationId: Int? = null) = Message(
-            id = notificationId ?: Random(10000).nextInt(),
+            id = (notificationId ?: data.getOrNull(ID)?.toInt()) ?: Random(1000).nextInt(),
             title = data.getOrNull(TITLE)!!,
             subtitle = data.getOrNull(SUBTITLE),
             image = data.getOrNull(IMAGE),

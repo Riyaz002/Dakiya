@@ -18,7 +18,7 @@ data class Carousel(
             if(carousel == null) return
             putInt(CURRENT_INDEX, carousel.currentIndex)
             putString(IMAGES, carousel.images?.joinToString(","))
-            putString(DOT_COLOR, DOT_COLOR)
+            putString(DOT_COLOR, carousel.dotActiveColor)
         }
 
         fun BaseBundle.getCarousel(): Carousel?{
@@ -31,7 +31,7 @@ data class Carousel(
 
         fun RemoteMessage.getCarousel(): Carousel?{
             return if(data.containsKey(IMAGES)) Carousel(
-                data.getOrNull(CURRENT_INDEX)!!.toInt(),
+                data.getOrNull(CURRENT_INDEX)?.toInt()?:0,
                 data.getOrNull(IMAGES)?.split(","),
                 data.getOrNull(DOT_COLOR)
             ) else null
