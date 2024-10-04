@@ -29,6 +29,12 @@ data class Message(
     val button2: String? = null,
     val button3: String? = null,
 ){
+
+    constructor(id: Int, title: String, subtitle: String?, style: Style, channelID: String): this(id, title, subtitle, null, style, channelID, null, null, null, null, null, null, null)
+    constructor(id: Int, title: String, subtitle: String?, image: String?, style: Style, channelID: String): this(id, title, subtitle, image, style, channelID, null, null, null, null, null, null, null)
+    constructor(id: Int, title: String, subtitle: String?, style: Style, channelID: String, timer: Timer?): this(id, title, subtitle, null, style, channelID, timer, null, null, null, null, null, null)
+    constructor(id: Int, title: String, subtitle: String?, style: Style, channelID: String, carousel: Carousel?): this(id, title, subtitle, null, style, channelID, null, null, carousel, null, null, null, null)
+
     companion object{
         const val ID = "id"
         private const val TITLE = "title"
