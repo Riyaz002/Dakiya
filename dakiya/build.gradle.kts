@@ -50,3 +50,16 @@ dependencies {
     testImplementation(libs.kotlin.reflect)
     testImplementation(libs.roboelectric)
 }
+
+afterEvaluate {
+    publishing{
+        publications {
+            create<MavenPublication>("release"){
+                from(components["release"])
+                groupId = "com.github.Riyaz002"
+                artifactId = "dakiya"
+                version = "0.3.7-alpha"
+            }
+        }
+    }
+}
