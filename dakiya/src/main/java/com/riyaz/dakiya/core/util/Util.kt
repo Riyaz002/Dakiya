@@ -24,6 +24,7 @@ fun Map<String, String?>.getOrNull(name: String): String?{
 }
 
 fun getImageBitmap(imageUrl: String?): Bitmap? {
+    //TODO: Implement image caching to avoid network resource consumption
     if (imageUrl == null) return null
     try {
         val url = URL(imageUrl)
