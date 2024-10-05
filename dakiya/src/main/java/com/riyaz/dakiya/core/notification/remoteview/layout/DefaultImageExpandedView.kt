@@ -1,7 +1,6 @@
 package com.riyaz.dakiya.core.notification.remoteview.layout
 
 import android.widget.RemoteViews
-import com.riyaz.dakiya.Dakiya
 import com.riyaz.dakiya.R
 import com.riyaz.dakiya.core.model.Message
 import com.riyaz.dakiya.core.notification.remoteview.View

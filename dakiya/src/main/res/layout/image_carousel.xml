@@ -38,11 +38,14 @@
         android:contentDescription="@string/forward_button"
         android:src="@drawable/baseline_arrow_24" />
 
-    <ListView
+    <LinearLayout
         android:id="@+id/dots"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
+        android:gravity="center_horizontal"
         android:layout_height="10dp"
-        android:visibility="gone"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:orientation="horizontal"
         android:layout_marginBottom="10dp"
         android:layout_alignParentBottom="true"/>
 </RelativeLayout>
