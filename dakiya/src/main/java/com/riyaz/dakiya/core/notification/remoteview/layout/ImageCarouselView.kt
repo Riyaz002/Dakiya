@@ -2,7 +2,7 @@ package com.riyaz.dakiya.core.notification.remoteview.layout
 
 import android.app.PendingIntent
 import android.content.Intent
-import android.os.Build
+import android.graphics.Color
 import android.os.Bundle
 import android.widget.RemoteViews
 import com.riyaz.dakiya.Dakiya
@@ -47,13 +47,14 @@ class ImageCarouselView: View {
                 carouselView.setFloat(R.id.button_forward, "setAlpha", 1f)
             } else carouselView.setFloat(R.id.button_forward, "setAlpha", 0.1f)
             carouselView.setOnClickPendingIntent(R.id.button_forward, forwardIntent)
-            if (Build.VERSION_CODES.S <= Build.VERSION.SDK_INT){
-                carouselView.setViewVisibility(R.id.dots, android.view.View.VISIBLE)
-
+            carouselView.setViewVisibility(R.id.dots, android.view.View.VISIBLE)
+            if(message.carousel.dotActiveColor!=null) {
+                val activeDotColor = Color.parseColor(message.carousel.dotActiveColor)
+                val inactiveColor = Color.argb(150, Color.red(activeDotColor), Color.green(activeDotColor), Color.blue(activeDotColor))
                 repeat(message.carousel.images.size){
-                    val dotColor = if(it==message.carousel.currentIndex) message.carousel.dotActiveColor?:"#555555" else "#555555"
+                    val dotColor = if(message.carousel.currentIndex == it) activeDotColor else inactiveColor
                     val dot = DotView(dotColor).get(message)
-                    carouselView.addView(R.id.dots,  dot)
+                    carouselView.addView(R.id.dots, dot)
                 }
             }
             carouselView

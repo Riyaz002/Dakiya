@@ -6,12 +6,11 @@ import com.riyaz.dakiya.Dakiya
 import com.riyaz.dakiya.R
 import com.riyaz.dakiya.core.model.Message
 import com.riyaz.dakiya.core.notification.remoteview.View
-import com.riyaz.dakiya.core.util.getImageBitmap
 
-class DotView(val color: String): View {
+class DotView(val color: Int): View {
     override fun get(message: Message): RemoteViews {
         val view = RemoteViews(Dakiya.getContext().packageName, R.layout.dot)
-        view.setInt(R.id.dot, "setBackground", Color.parseColor(color))
+        view.setInt(R.id.dot, "setBackgroundColor", color)
         return view
     }
 }

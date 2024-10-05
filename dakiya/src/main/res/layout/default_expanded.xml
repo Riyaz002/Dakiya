@@ -20,9 +20,9 @@
         style="@style/TextAppearance.Compat.Notification.Line2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="4dp"
         android:ellipsize="end"
-        android:textSize="14dp"
+        android:textSize="14sp"
         tool:text="This is the body. The height is manually forced to 300dp." />
 
     <ImageView
