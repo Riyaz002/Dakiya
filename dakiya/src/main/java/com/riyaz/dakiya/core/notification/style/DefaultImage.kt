@@ -27,6 +27,7 @@ internal class DefaultImage: NotificationBuilderAssembler {
         val expandedView = RemoteViews(Dakiya.getContext().packageName, R.layout.default_expanded)
         expandedView.setTextViewText(R.id.notification_title, message.title)
         expandedView.setTextViewText(R.id.notification_body, message.subtitle)
+        expandedView.setInt(R.id.notification_body, "setMaxLines",7)
 
         message.image?.let {
             val image = getImageBitmap(it)
