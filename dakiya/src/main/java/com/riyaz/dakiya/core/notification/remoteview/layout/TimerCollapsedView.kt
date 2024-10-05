@@ -15,7 +15,7 @@ class TimerCollapsedView(private val endInMillis: Long): View {
     override fun get(message: Message): RemoteViews {
         val view = RemoteViews(Dakiya.getContext().packageName, R.layout.timer_collapsed)
         view.setTextViewText(R.id.notification_title, message.title)
-        view.setTextViewText(R.id.notification_subtitle, message.subtitle)
+        view.setTextViewText(R.id.notification_body, message.subtitle)
         view.setChronometerCountDown(R.id.notification_timer, true)
         view.setChronometer(
             R.id.notification_timer,

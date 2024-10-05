@@ -36,7 +36,7 @@
         android:maxLines="1" />
 
     <TextView
-        android:id="@+id/notification_subtitle"
+        android:id="@+id/notification_body"
         style="@style/TextAppearance.Compat.Notification.Line2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -53,7 +53,7 @@
         android:layout_alignParentStart="true"
         android:layout_toStartOf="@+id/notification_timer"
         android:layout_height="wrap_content"
-        android:layout_below="@id/notification_subtitle"
+        android:layout_below="@id/notification_body"
         android:layout_marginTop="5dp"
         android:indeterminate="false" />
 </RelativeLayout>

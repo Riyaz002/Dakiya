@@ -33,7 +33,7 @@ class ProgressTimerExpandedView(private val endInMillis: Long): View {
 
         val view = RemoteViews(Dakiya.getContext().packageName, R.layout.progress_timer_expanded)
         view.setTextViewText(R.id.notification_title, message.title)
-        view.setTextViewText(R.id.notification_subtitle, message.subtitle)
+        view.setTextViewText(R.id.notification_body, message.subtitle)
         view.setChronometerCountDown(R.id.notification_timer, true)
         view.setChronometer(
             R.id.notification_timer,
@@ -42,6 +42,7 @@ class ProgressTimerExpandedView(private val endInMillis: Long): View {
             true
         )
         view.setProgressBar(R.id.notification_progress, 100, currentPerc.toInt(), false)
+        view.setInt(R.id.notification_body, "setMaxLines",10)
         kotlin.runCatching {
             val themeColor = Color.parseColor(message.themeColor)
             view.setInt(R.id.notification_timer, "setTextColor", themeColor)

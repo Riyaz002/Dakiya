@@ -28,9 +28,11 @@
 
         <TextView
             android:id="@+id/notification_body"
+            style="@style/TextAppearance.Compat.Notification.Line2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ellipsize="end"
+            android:textSize="14sp"
             android:maxLines="1"
             tool:text="This is the body. The height is manually forced to 300dp." />
     </LinearLayout>
