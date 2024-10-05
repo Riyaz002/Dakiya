@@ -3,6 +3,7 @@ package com.riyaz.dakiya
 import android.content.Context
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
+import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.google.firebase.messaging.RemoteMessage
 import com.riyaz.dakiya.core.Constant.DAKIYA
@@ -15,6 +16,7 @@ import com.riyaz.dakiya.core.util.getOrNull
 import kotlin.concurrent.thread
 
 object Dakiya {
+    const val TAG = "Dakiye"
     private lateinit var applicationContext: Context
     fun getContext() = applicationContext
     private var _smallIcon: Int? = null
@@ -47,6 +49,7 @@ object Dakiya {
             val assembler = message.style.getAssembler()
             return Result.success(assembler.assemble(message))
         } catch (e: DakiyaException){
+            Log.e(TAG, e.message)
             return Result.failure(e)
         }
     }

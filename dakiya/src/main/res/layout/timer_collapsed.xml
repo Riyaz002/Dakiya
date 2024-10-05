@@ -23,7 +23,7 @@
         style="@style/TextAppearance.Compat.Notification.Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@id/notification_subtitle"
+        android:layout_alignBaseline="@id/notification_body"
         android:layout_alignParentEnd="true"
         android:layout_gravity="end"
         android:layout_marginEnd="16dp"
@@ -31,7 +31,9 @@
         android:maxLines="1" />
 
     <TextView
-        android:id="@+id/notification_subtitle"
+        android:id="@+id/notification_body"
+        style="@style/TextAppearance.Compat.Notification.Line2"
+        android:textSize="14sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/notification_title"
