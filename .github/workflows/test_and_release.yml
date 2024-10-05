@@ -1,0 +1,61 @@
+---
+name: Create Release
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch: null
+jobs:
+  build-and-test:
+    name: Build project
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Set Up JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu' # See 'Supported distributions' for available options
+          java-version: '17'
+          cache: 'gradle'
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+      - name: Build
+        run: ./gradlew build
+      - name: Test
+        run: ./gradlew test
+        
+  release:
+    needs: build-and-test
+    name: Create Release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      repository-projects: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Initialize required variables
+        run: |
+          echo "Tag_Name=$(awk -F= '$1 == "TAG_NAME"{print $2}' release.properties)" >> $GITHUB_ENV
+          echo "Release_Name=$(awk -F= '$1 == "RELEASE_NAME"{print $2}' release.properties)" >> $GITHUB_ENV
+          echo "Prerelease=$(awk -F= '$1 == "PRE_RELEASE"{print $2}' release.properties)" >> $GITHUB_ENV
+          echo "Release_Note=$(awk -F= '$1 == "RELEASE_NOTE"{print $2}' release.properties)" >> $GITHUB_ENV
+        
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          # Tag_Name: ${{ $(awk -F= '$1 == "TAG_NAME"{print $2}' release.properties) }}
+          # Release_Name: ${{ $(awk -F= '$1 == "RELEASE_NAME"{print $2}' release.properties) }}
+          # Prerelease: ${{ $(awk -F= '$1 == "PRE_RELEASE"{print $2}' release.properties) }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:    
+          tag_name: ${{ env.Tag_Name }}
+          release_name: ${{ env.Release_Name }}
+          body: |
+            Changes in this Release
+            - ${{ env.Release_Note }}
+          draft: false
+          prerelease: ${{ env.Prerelease == 'true' }}
