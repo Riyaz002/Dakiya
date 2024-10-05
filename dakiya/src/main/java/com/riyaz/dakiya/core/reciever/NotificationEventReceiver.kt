@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import androidx.core.content.ContextCompat.getSystemService
+import com.riyaz.dakiya.Dakiya
 import com.riyaz.dakiya.core.model.Message
 import com.riyaz.dakiya.core.model.Message.Companion.toDakiyaMessage
 import com.riyaz.dakiya.core.util.getNotificationManager
@@ -14,6 +15,10 @@ import kotlin.math.abs
 internal class NotificationEventReceiver: BroadcastReceiver() {
     override fun onReceive(context: Context?, intent: Intent?) {
         when(intent?.action){
+            ACTION_CLICK -> {
+                val link = intent.extras?.getString(LINK)?:return
+                Dakiya.onClick!!.invoke(link)
+            }
             ACTION_DELETE -> {
                 val jobId = intent.extras?.getInt(Message.ID)
                 val jobScheduler = getSystemService(context!!, JobScheduler::class.java)
@@ -38,9 +43,11 @@ internal class NotificationEventReceiver: BroadcastReceiver() {
     }
 
     companion object{
+        const val ACTION_CLICK = "click"
         const val ACTION_DELETE = "delete"
         const val ACTION_FORWARD = "forward"
         const val ACTION_BACKWARD = "backward"
+        const val LINK = "link"
         const val DATA = "data"
         const val REQUEST_CODE = 12
     }

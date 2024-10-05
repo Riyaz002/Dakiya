@@ -6,18 +6,20 @@ import android.content.pm.PackageManager
 import androidx.core.app.NotificationCompat
 import com.google.firebase.messaging.RemoteMessage
 import com.riyaz.dakiya.core.Constant.DAKIYA
+import com.riyaz.dakiya.core.EventListener
+import com.riyaz.dakiya.core.model.Event
 import com.riyaz.dakiya.core.model.Message
 import com.riyaz.dakiya.core.util.DakiyaException
 import com.riyaz.dakiya.core.util.getNotificationManager
 import com.riyaz.dakiya.core.util.getOrNull
 import kotlin.concurrent.thread
 
-
 object Dakiya {
     private lateinit var applicationContext: Context
     fun getContext() = applicationContext
     private var _smallIcon: Int? = null
     internal val smallIcon: Int get() = _smallIcon!!
+    internal var onClick: ((String) -> Unit)? = null
 
     internal fun init(context: Context){
         val ai: ApplicationInfo = context.packageManager.getApplicationInfo(context.packageName, PackageManager.GET_META_DATA)
@@ -26,6 +28,10 @@ object Dakiya {
         if(iconId == 0) throw DakiyaException.MetaTagNotFoundException("Notification_Small_Icon")
         else _smallIcon = iconId
         applicationContext = context.applicationContext
+    }
+
+    fun setClickListener(click: (String) -> Unit){
+        onClick = click
     }
 
     fun isDakiyaNotification(message: RemoteMessage): Boolean{
@@ -47,6 +53,7 @@ object Dakiya {
 
     fun showNotification(message: Message){
         thread {
+            EventListener.register(Event.ShowNotification)
             val result = prepareNotificationBuilder(message)
             result.getOrNull()?.let { notificationBuilder ->
                 getNotificationManager()?.notify(message.id, notificationBuilder.build())

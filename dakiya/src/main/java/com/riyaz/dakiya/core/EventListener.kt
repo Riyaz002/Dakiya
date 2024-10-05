@@ -8,6 +8,7 @@ import com.riyaz.dakiya.Dakiya
 import com.riyaz.dakiya.core.model.Event
 import com.riyaz.dakiya.core.model.Message.Companion.toPersistableBundle
 import com.riyaz.dakiya.core.service.UpdateNotificationJob
+import com.riyaz.dakiya.core.util.DakiyaException
 
 internal object EventListener {
     fun register(event: Event){
@@ -24,6 +25,10 @@ internal object EventListener {
                         jobScheduler.schedule(jobInfo)
                     }
                 }
+            }
+
+            Event.ShowNotification -> {
+                if(Dakiya.onClick == null) DakiyaException.Generic("onClick callback is not implemented. please refer to the documentation: https://github.com/Riyaz002/Dakiya")
             }
         }
     }

@@ -8,16 +8,16 @@ Introducing **Dakiya**, an Android library designed to render beautiful and high
 - Add the below dependency in your app.gradle
 ```kotlin
     dependencies {
-        implementation 'com.github.Riyaz002:Dakiya:0.3.2-alpha'
+        implementation 'com.github.Riyaz002:Dakiya:0.4.0-alpha'
     }
 ```
 - Make sure you have include the required repository.  Add this into your project.gradle
 ```kotlin
     dependencyResolutionManagement {
 		repositories {
-            ...
+            ..
 			maven { url 'https://jitpack.io' }
-            ...
+            ..
 		}
     }
 ```
@@ -32,6 +32,14 @@ In your manifest file. Set the notification small icon.
 		android:resource="@drawable/your_notification_small_icon"
 	/>
 ```
+
+Anywhere, before calling Dakiya.showNotification or Dakiya.prepareNotificationBuilder. Set callback lambda using Dakiya.setCallback. The lambda will be invoked with a link when user will click on a button inside the notification.
+```kotlin
+	Dakiya.setClickListener { link: String ->
+	    //login to handle link
+    }
+```
+
 
 ### Show notification
 ```kotlin
@@ -88,7 +96,7 @@ Inside your FirebaseMessagingService class
         override fun onMessageReceived(message: RemoteMessage) {  
             super.onMessageReceived(message)
             if(Dakiya.isDakiyaNotification(message)){
-		        val dakiyaMessage = message.toDakiyaMessage(notificationId = 10)
+		        val dakiyaMessage = message.toDakiyaMessage()
 		        Dakiya.showNotification(dakiyaMessage)
             }
         }
