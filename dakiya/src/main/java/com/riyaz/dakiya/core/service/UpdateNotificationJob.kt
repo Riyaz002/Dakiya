@@ -3,7 +3,7 @@ package com.riyaz.dakiya.core.service
 import android.app.job.JobParameters
 import android.app.job.JobService
 import com.riyaz.dakiya.core.model.Message.Companion.toDakiyaMessage
-import com.riyaz.dakiya.core.util.getNotificationManager
+import com.riyaz.dakiya.core.getNotificationManager
 
 internal class UpdateNotificationJob: JobService() {
     override fun onStartJob(params: JobParameters?): Boolean {

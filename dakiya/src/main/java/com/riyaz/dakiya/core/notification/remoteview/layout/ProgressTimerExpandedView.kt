@@ -10,12 +10,12 @@ import com.riyaz.dakiya.Dakiya
 import com.riyaz.dakiya.R
 import com.riyaz.dakiya.core.model.Message
 import com.riyaz.dakiya.core.model.Timer
-import com.riyaz.dakiya.core.notification.remoteview.View
-import com.riyaz.dakiya.core.util.DakiyaException
-import com.riyaz.dakiya.core.util.lightenColor
+import com.riyaz.dakiya.core.notification.remoteview.RemoteView
+import com.riyaz.dakiya.core.DakiyaException
+import com.riyaz.dakiya.core.lightenColor
 import java.util.Date
 
-class ProgressTimerExpandedView(private val endInMillis: Long): View {
+class ProgressTimerExpandedView(private val endInMillis: Long): RemoteView {
 
     @Throws(DakiyaException::class)
     @RequiresApi(Build.VERSION_CODES.N)

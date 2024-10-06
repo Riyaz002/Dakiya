@@ -8,9 +8,9 @@ import androidx.annotation.RequiresApi
 import com.riyaz.dakiya.Dakiya
 import com.riyaz.dakiya.R
 import com.riyaz.dakiya.core.model.Message
-import com.riyaz.dakiya.core.notification.remoteview.View
+import com.riyaz.dakiya.core.notification.remoteview.RemoteView
 
-class TimerCollapsedView(private val endInMillis: Long): View {
+class TimerCollapsedView(private val endInMillis: Long): RemoteView {
     @RequiresApi(Build.VERSION_CODES.N)
     override fun get(message: Message): RemoteViews {
         val view = RemoteViews(Dakiya.getContext().packageName, R.layout.timer_collapsed)

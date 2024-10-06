@@ -6,7 +6,7 @@ import com.riyaz.dakiya.convertEpochMillisToFormattedDate
 import com.riyaz.dakiya.core.model.Message
 import com.riyaz.dakiya.core.model.Timer
 import com.riyaz.dakiya.core.notification.Style
-import com.riyaz.dakiya.core.util.DakiyaException
+import com.riyaz.dakiya.core.DakiyaException
 import org.junit.Assert.assertTrue
 import org.junit.Test
 import org.junit.runner.RunWith

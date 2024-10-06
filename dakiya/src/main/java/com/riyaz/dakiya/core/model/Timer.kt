@@ -2,7 +2,7 @@ package com.riyaz.dakiya.core.model
 
 import android.os.BaseBundle
 import com.google.firebase.messaging.RemoteMessage
-import com.riyaz.dakiya.core.util.getOrNull
+import com.riyaz.dakiya.core.getOrNull
 
 data class Timer(
     val startedAt: Long,

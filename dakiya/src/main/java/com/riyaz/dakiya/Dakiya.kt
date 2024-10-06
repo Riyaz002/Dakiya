@@ -10,13 +10,14 @@ import com.riyaz.dakiya.core.Constant.DAKIYA
 import com.riyaz.dakiya.core.EventListener
 import com.riyaz.dakiya.core.model.Event
 import com.riyaz.dakiya.core.model.Message
-import com.riyaz.dakiya.core.util.DakiyaException
-import com.riyaz.dakiya.core.util.getNotificationManager
-import com.riyaz.dakiya.core.util.getOrNull
+import com.riyaz.dakiya.core.DakiyaException
+import com.riyaz.dakiya.core.ImageLoader
+import com.riyaz.dakiya.core.getNotificationManager
+import com.riyaz.dakiya.core.getOrNull
 import kotlin.concurrent.thread
 
 object Dakiya {
-    const val TAG = "Dakiye"
+    const val TAG = "Dakiya"
     private lateinit var applicationContext: Context
     fun getContext() = applicationContext
     private var _smallIcon: Int? = null
@@ -30,6 +31,9 @@ object Dakiya {
         if(iconId == 0) throw DakiyaException.MetaTagNotFoundException("Notification_Small_Icon")
         else _smallIcon = iconId
         applicationContext = context.applicationContext
+        thread {
+            ImageLoader.initialize(context)
+        }
     }
 
     fun setClickListener(click: (String) -> Unit){
@@ -37,7 +41,7 @@ object Dakiya {
     }
 
     fun isDakiyaNotification(message: RemoteMessage): Boolean{
-        return message.data.getOrNull(DAKIYA)?.toBoolean() == true
+        return message.data.getOrNull(DAKIYA) == "true"
     }
 
     /**
@@ -47,7 +51,8 @@ object Dakiya {
     fun prepareNotificationBuilder(message: Message): Result<NotificationCompat.Builder> {
         try{
             val assembler = message.style.getAssembler()
-            return Result.success(assembler.assemble(message))
+            val builder = assembler.assemble(message)
+            return Result.success(builder)
         } catch (e: DakiyaException){
             Log.e(TAG, e.message)
             return Result.failure(e)
