@@ -32,8 +32,8 @@ class ImageCarouselView: RemoteView {
                     notificationEventIntent,
                     PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE
                 )
-                carouselView.setFloat(R.id.button_backward, "setAlpha", 1f)
-            } else carouselView.setFloat(R.id.button_backward, "setAlpha", 0.1f)
+                carouselView.setInt(R.id.button_backward, "setImageAlpha", 255)
+            } else carouselView.setInt(R.id.button_backward, "setImageAlpha", 50)
             carouselView.setOnClickPendingIntent(R.id.button_backward, backwardIntent)
 
             if(message.carousel.currentIndex < message.carousel.images.size-1){
@@ -44,8 +44,8 @@ class ImageCarouselView: RemoteView {
                     notificationEventIntent,
                     PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE
                 )
-                carouselView.setFloat(R.id.button_forward, "setAlpha", 1f)
-            } else carouselView.setFloat(R.id.button_forward, "setAlpha", 0.1f)
+                carouselView.setInt(R.id.button_forward, "setImageAlpha", 255)
+            } else carouselView.setInt(R.id.button_forward, "setImageAlpha", 50)
             carouselView.setOnClickPendingIntent(R.id.button_forward, forwardIntent)
             carouselView.setViewVisibility(R.id.dots, android.view.View.VISIBLE)
             if(message.carousel.dotActiveColor!=null) {
