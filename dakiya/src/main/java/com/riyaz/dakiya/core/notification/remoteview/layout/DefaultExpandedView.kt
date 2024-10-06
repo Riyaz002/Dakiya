@@ -4,10 +4,9 @@ import android.widget.RemoteViews
 import com.riyaz.dakiya.Dakiya
 import com.riyaz.dakiya.R
 import com.riyaz.dakiya.core.model.Message
-import com.riyaz.dakiya.core.notification.remoteview.View
-import com.riyaz.dakiya.core.util.getImageBitmap
+import com.riyaz.dakiya.core.notification.remoteview.RemoteView
 
-class DefaultExpandedView: View {
+class DefaultExpandedView: RemoteView {
     override fun get(message: Message): RemoteViews {
         val view = RemoteViews(Dakiya.getContext().packageName, R.layout.default_expanded)
         view.setTextViewText(R.id.notification_title, message.title)

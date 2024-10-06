@@ -3,7 +3,7 @@ package com.riyaz.dakiya.core.notification.style
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.riyaz.dakiya.core.model.Message
 import com.riyaz.dakiya.core.notification.Style
-import com.riyaz.dakiya.core.util.DakiyaException
+import com.riyaz.dakiya.core.DakiyaException
 import org.junit.Assert.assertTrue
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -14,7 +14,7 @@ class ImageCarouselTest{
 
     @Test
     fun emptyCarouselImages_throwsException(){
-        var exception: DakiyaException ?= null
+        var exception: DakiyaException?= null
         try {
             message.style.getAssembler().assemble(message)
         } catch (e: Exception){

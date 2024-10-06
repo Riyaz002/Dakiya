@@ -4,11 +4,14 @@ import android.app.job.JobScheduler
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import androidx.core.content.ContextCompat.getSystemService
 import com.riyaz.dakiya.Dakiya
+import com.riyaz.dakiya.core.ImageLoader
 import com.riyaz.dakiya.core.model.Message
 import com.riyaz.dakiya.core.model.Message.Companion.toDakiyaMessage
-import com.riyaz.dakiya.core.util.getNotificationManager
+import com.riyaz.dakiya.core.notification.Style
+import com.riyaz.dakiya.core.getNotificationManager
 import kotlin.concurrent.thread
 import kotlin.math.abs
 
@@ -20,11 +23,19 @@ internal class NotificationEventReceiver: BroadcastReceiver() {
                 Dakiya.onClick!!.invoke(link)
             }
             ACTION_DELETE -> {
-                val jobId = intent.extras?.getInt(Message.ID)
-                val jobScheduler = getSystemService(context!!, JobScheduler::class.java)
-                if (jobId != null) {
-                    jobScheduler?.cancel(jobId)
+                val message = intent.getBundleExtra(DATA)?.toDakiyaMessage() ?: throw IllegalStateException()
+
+                //removing job related to updating the notification
+                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N && message.style == Style.PROGRESS_TIMER){
+                    val jobId = intent.extras?.getInt(Message.ID)
+                    val jobScheduler = getSystemService(context!!, JobScheduler::class.java)
+                    if (jobId != null) {
+                        jobScheduler?.cancel(jobId)
+                    }
                 }
+                //removing cached image of the notification
+                message.carousel?.images?.forEach { ImageLoader.remove(it) }
+                ImageLoader.remove(message.image)
             }
             ACTION_FORWARD,
             ACTION_BACKWARD -> {

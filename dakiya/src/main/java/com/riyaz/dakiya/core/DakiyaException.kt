@@ -1,4 +1,4 @@
-package com.riyaz.dakiya.core.util
+package com.riyaz.dakiya.core
 
 internal sealed class DakiyaException private constructor(override val message: String): Exception(){
     class RequiredFieldNullException(private val fieldName: String): DakiyaException("$fieldName is null")

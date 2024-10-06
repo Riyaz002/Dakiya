@@ -7,18 +7,18 @@ import android.os.Bundle
 import android.widget.RemoteViews
 import com.riyaz.dakiya.Dakiya
 import com.riyaz.dakiya.R
+import com.riyaz.dakiya.core.ImageLoader
 import com.riyaz.dakiya.core.model.Message
 import com.riyaz.dakiya.core.model.Message.Companion.toBundle
-import com.riyaz.dakiya.core.notification.remoteview.View
+import com.riyaz.dakiya.core.notification.remoteview.RemoteView
 import com.riyaz.dakiya.core.reciever.NotificationEventReceiver
 import com.riyaz.dakiya.core.reciever.NotificationEventReceiver.Companion.DATA
-import com.riyaz.dakiya.core.util.getImageBitmap
 
-class ImageCarouselView: View {
+class ImageCarouselView: RemoteView {
     override fun get(message: Message): RemoteViews? {
         return if (message.carousel?.images != null) {
             val carouselView = RemoteViews(Dakiya.getContext().packageName, R.layout.image_carousel)
-            val bitmap = getImageBitmap(message.carousel.images[message.carousel.currentIndex])
+            val bitmap = ImageLoader.getImageBitmap(message.carousel.images[message.carousel.currentIndex])
             carouselView.setImageViewBitmap(R.id.notification_carousel, bitmap)
             val notificationEventIntent = Intent(Dakiya.getContext(), NotificationEventReceiver::class.java)
             notificationEventIntent.putExtra(DATA, message.toBundle() as Bundle)

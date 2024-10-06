@@ -7,7 +7,7 @@ import com.riyaz.dakiya.core.notification.style.Default
 import com.riyaz.dakiya.core.notification.style.DefaultImage
 import com.riyaz.dakiya.core.notification.style.ImageCarousel
 import com.riyaz.dakiya.core.notification.style.ProgressWithTimer
-import com.riyaz.dakiya.core.util.DakiyaException
+import com.riyaz.dakiya.core.DakiyaException
 import kotlin.reflect.KClass
 import kotlin.reflect.full.createInstance
 
