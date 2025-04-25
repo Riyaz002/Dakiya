@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application>
         <service android:name="com.riyaz.dakiya.core.service.UpdateNotificationJob"
             android:enabled="true"
@@ -12,7 +11,7 @@
             android:enabled="true" />
 
         <provider
-            android:authorities="com.dailyobjects.marche"
+            android:authorities="${applicationId}.provider"
             android:name=".core.provider.Initializer"
             android:exported="false"
             android:enabled="true"/>
