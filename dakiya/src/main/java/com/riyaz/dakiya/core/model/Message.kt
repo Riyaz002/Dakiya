@@ -11,7 +11,7 @@ import com.riyaz.dakiya.core.model.Timer.Companion.putTimer
 import com.riyaz.dakiya.core.notification.Style
 import com.riyaz.dakiya.core.notification.Style.Companion.getStyle
 import com.riyaz.dakiya.core.DakiyaException
-import com.riyaz.dakiya.core.getOrNull
+import com.riyaz.dakiya.core.util.getOrNull
 import kotlin.random.Random
 
 data class Message(

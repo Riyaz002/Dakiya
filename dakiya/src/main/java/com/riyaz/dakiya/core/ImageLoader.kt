@@ -5,10 +5,10 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import com.riyaz.dakiya.Dakiya
 import com.riyaz.dakiya.core.cache.DiskLruCache
+import com.riyaz.dakiya.core.util.tryWithLog
 import java.io.File
 import java.io.IOException
 import java.net.URL
-import java.util.concurrent.locks.Condition
 import java.util.concurrent.locks.ReentrantLock
 
 
@@ -44,18 +44,16 @@ internal object ImageLoader {
         if(diskCache!!.containsKey(imageUrl)){
             return get(imageUrl)
         }
-        try {
+       return tryWithLog("Failed to load image from url: $imageUrl") {
             val url = URL(imageUrl)
             with(url.openConnection().getInputStream()) {
                 val bitmap = BitmapFactory.decodeStream(this).also {
                     close()
                 }
                 add(imageUrl, bitmap)
-                return bitmap
+                bitmap
             }
-        } catch (e: IOException) {
-            return null
-        }
+        }?.getOrNull()
     }
 
     private fun add(key: String, bitmap: Bitmap){

@@ -12,7 +12,7 @@ import com.riyaz.dakiya.core.model.Message
 import com.riyaz.dakiya.core.model.Timer
 import com.riyaz.dakiya.core.notification.remoteview.RemoteView
 import com.riyaz.dakiya.core.DakiyaException
-import com.riyaz.dakiya.core.lightenColor
+import com.riyaz.dakiya.core.util.lightenColor
 import java.util.Date
 
 class ProgressTimerExpandedView(private val endInMillis: Long): RemoteView {

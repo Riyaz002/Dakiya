@@ -10,7 +10,7 @@ import com.riyaz.dakiya.core.EventListener
 import com.riyaz.dakiya.core.model.Timer
 import com.riyaz.dakiya.core.notification.remoteview.layout.ProgressTimerExpandedView
 import com.riyaz.dakiya.core.notification.remoteview.layout.TimerCollapsedView
-import com.riyaz.dakiya.core.endsInMillis
+import com.riyaz.dakiya.core.util.endsInMillis
 
 
 internal class ProgressWithTimer: NotificationBuilderAssembler() {

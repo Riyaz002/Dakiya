@@ -12,8 +12,10 @@ import com.riyaz.dakiya.core.model.Event
 import com.riyaz.dakiya.core.model.Message
 import com.riyaz.dakiya.core.DakiyaException
 import com.riyaz.dakiya.core.ImageLoader
-import com.riyaz.dakiya.core.getNotificationManager
-import com.riyaz.dakiya.core.getOrNull
+import com.riyaz.dakiya.core.util.getNotificationManager
+import com.riyaz.dakiya.core.util.getOrNull
+import com.riyaz.dakiya.core.util.isSystemCompatible
+import com.riyaz.dakiya.core.util.log
 import kotlin.concurrent.thread
 
 object Dakiya {
@@ -50,6 +52,11 @@ object Dakiya {
      */
     fun prepareNotificationBuilder(message: Message): Result<NotificationCompat.Builder> {
         try{
+            if(!isSystemCompatible(getContext()) && message.image!=null){
+                //System is not compatible to show notification with images
+                //throw DakiyaException.SystemIncompatibleException()
+                log("System is not compatible right now!")
+            }
             val assembler = message.style.getAssembler()
             val builder = assembler.assemble(message)
             return Result.success(builder)

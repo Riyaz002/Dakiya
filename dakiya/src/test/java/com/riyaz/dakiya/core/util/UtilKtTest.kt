@@ -1,7 +1,6 @@
 package com.riyaz.dakiya.core.util
 
 import androidx.test.filters.SmallTest
-import com.riyaz.dakiya.core.getOrNull
 import org.junit.Assert
 import org.junit.Test
 

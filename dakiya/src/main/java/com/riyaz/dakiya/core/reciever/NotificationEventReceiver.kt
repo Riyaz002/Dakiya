@@ -11,7 +11,7 @@ import com.riyaz.dakiya.core.ImageLoader
 import com.riyaz.dakiya.core.model.Message
 import com.riyaz.dakiya.core.model.Message.Companion.toDakiyaMessage
 import com.riyaz.dakiya.core.notification.Style
-import com.riyaz.dakiya.core.getNotificationManager
+import com.riyaz.dakiya.core.util.getNotificationManager
 import kotlin.concurrent.thread
 import kotlin.math.abs
 

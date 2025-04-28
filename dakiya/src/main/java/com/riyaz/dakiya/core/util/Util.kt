@@ -1,8 +1,10 @@
-package com.riyaz.dakiya.core
+package com.riyaz.dakiya.core.util
 
 import android.app.NotificationManager
+import android.content.Context
 import android.graphics.Color
 import android.os.Build
+import android.os.PowerManager
 import androidx.core.content.ContextCompat.getSystemService
 import com.riyaz.dakiya.Dakiya
 import org.json.JSONException
@@ -49,4 +51,13 @@ fun lightenColor(color: Int, factor: Float): Int {
 
     // Return the lighter color as an int
     return Color.argb(a, newR, newG, newB)
+}
+
+fun isSystemCompatible(context: Context): Boolean{
+    var isCompatible = true
+    val pm = context.getSystemService(Context.POWER_SERVICE) as PowerManager
+    if(Build.VERSION.SDK_INT >= 23){
+        isCompatible = !pm.isDeviceIdleMode
+    }
+    return isCompatible
 }

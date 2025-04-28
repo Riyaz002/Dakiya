@@ -7,7 +7,7 @@ import com.riyaz.dakiya.core.notification.NotificationBuilderAssembler
 import com.riyaz.dakiya.core.notification.remoteview.layout.BigTimerExpandedView
 import com.riyaz.dakiya.core.notification.remoteview.layout.TimerCollapsedView
 import com.riyaz.dakiya.core.DakiyaException
-import com.riyaz.dakiya.core.endsInMillis
+import com.riyaz.dakiya.core.util.endsInMillis
 import java.util.Date
 
 
