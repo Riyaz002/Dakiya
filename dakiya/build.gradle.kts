@@ -9,7 +9,7 @@ group = "com.github.Riyaz002"
 
 android {
     namespace = "com.riyaz.dakiya"
-    compileSdk = 36
+    compileSdk = 34
 
     defaultConfig {
         minSdk = 21
