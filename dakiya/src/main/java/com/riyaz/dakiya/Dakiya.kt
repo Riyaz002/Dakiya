@@ -7,8 +7,6 @@ import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.google.firebase.messaging.RemoteMessage
 import com.riyaz.dakiya.core.Constant.DAKIYA
-import com.riyaz.dakiya.core.EventListener
-import com.riyaz.dakiya.core.model.Event
 import com.riyaz.dakiya.core.model.Message
 import com.riyaz.dakiya.core.DakiyaException
 import com.riyaz.dakiya.core.ImageLoader
@@ -68,7 +66,7 @@ object Dakiya {
 
     fun showNotification(message: Message){
         thread {
-            EventListener.register(Event.ShowNotification)
+            TODO("put replacement for EventListener") //EventListener.register(Event.ShowNotification)
             val result = prepareNotificationBuilder(message)
             result.getOrNull()?.let { notificationBuilder ->
                 getNotificationManager()?.notify(message.id, notificationBuilder.build())

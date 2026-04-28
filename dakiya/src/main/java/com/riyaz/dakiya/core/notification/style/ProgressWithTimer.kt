@@ -2,11 +2,9 @@ package com.riyaz.dakiya.core.notification.style
 
 import android.os.Build
 import androidx.core.app.NotificationCompat
-import com.riyaz.dakiya.core.model.Event
 import com.riyaz.dakiya.core.model.Message
 import com.riyaz.dakiya.core.notification.NotificationBuilderAssembler
 import com.riyaz.dakiya.core.DakiyaException
-import com.riyaz.dakiya.core.EventListener
 import com.riyaz.dakiya.core.model.Timer
 import com.riyaz.dakiya.core.notification.remoteview.layout.ProgressTimerExpandedView
 import com.riyaz.dakiya.core.notification.remoteview.layout.TimerCollapsedView
@@ -32,7 +30,7 @@ internal class ProgressWithTimer: NotificationBuilderAssembler() {
         val expandedView = ProgressTimerExpandedView(endInMillis).get(message)
         builder.setCustomBigContentView(expandedView)
 
-        EventListener.register(Event.ScheduleUpdateNotificationJob(message))
+        // TODO("Add and progress update job for old version and progress bar for android 36 and above") EventListener.register(Event.ScheduleUpdateNotificationJob(message))
         return builder
     }
 
